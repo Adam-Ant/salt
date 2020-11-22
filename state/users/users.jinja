@@ -1,0 +1,26 @@
+{%- set sudo_group = 'sudo' if grains.os|lower == 'debian' else 'wheel' %}
+{%- set admin_groups = [sudo_group] %}
+{%- set optional_groups = ['docker'] %}
+{%- if grains.init == 'systemd' %}
+  {%- do optional_groups.append('systemd-journal') %}
+{%- endif %}
+
+adam:
+  groups:
+{%- for group in admin_groups %}
+  - {{ group }}
+{%- endfor %}
+  optional_groups:
+{%- for group in optional_groups %}
+  - {{ group }}
+{%- endfor %}
+
+frebib:
+  groups:
+{%- for group in admin_groups %}
+  - {{ group }}
+{%- endfor %}
+  optional_groups:
+{%- for group in optional_groups %}
+  - {{ group }}
+{%- endfor %}
