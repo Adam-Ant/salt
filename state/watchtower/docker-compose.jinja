@@ -1,0 +1,16 @@
+version: '2.0'
+
+services:
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: unless-stopped
+    hostname: Watchtower-{{ grains.host }}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_POLL_INTERVAL={{ salt.pillar.get('watchtower:poll_interval', '900') }}
+      - WATCHTOWER_CLEANUP={{ salt.pillar.get('watchtower:cleanup', 'true') }}
+      - WATCHTOWER_NOTIFICATIONS=slack
+      - WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL=https://adam-ant.co.uk/watchtower.php
+      - WATCHTOWER_NOTIFICATION_SLACK_IDENTIFIER=Watchtower-{{ grains.host }}
