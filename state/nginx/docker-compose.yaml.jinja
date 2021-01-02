@@ -1,0 +1,43 @@
+{% set bind_ip = salt.pillar.get('nginx:bind_ip', '0.0.0.0') %}
+
+version: "2.0"
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    depends_on:
+         - php
+    volumes:
+      - /volumes/web/certs:/certs
+      - /volumes/web/conf:/etc/nginx/conf.d
+      - /volumes/web/www:/var/www
+    ports:
+      - {{ bind_ip }}:443:443
+      - {{ bind_ip }}:80:80
+    {% if salt.pillar.get('nginx:extra_binds') %}
+    {% for ip in salt.pillar.get('nginx:extra_binds') %}
+      - {{ ip }}
+    {% endfor %}
+    {% endif %}
+    networks:
+      - backend
+      - proxy
+
+  php:
+    image: {{ salt.pillar.get('nginx:php_image','php:fpm-alpine') }}
+    container_name: php
+    restart: unless-stopped
+    environment:
+      - PLEX_TOKEN={{ salt.pillar.get('nginx:plex_token', '') }}
+    working_dir: /var/www
+    volumes:
+      - /volumes/web/www:/var/www
+    networks:
+      - backend
+
+networks:
+  backend:
+  proxy:
+
