@@ -1,5 +1,6 @@
 {{ saltenv }}:
   '*':
+    - users
     - docker
     - secret
 
