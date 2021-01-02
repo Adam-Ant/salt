@@ -1,6 +1,7 @@
 import logging
 import os
 import re
+import sys
 
 import salt.ext.six
 
@@ -76,6 +77,20 @@ def up(name, **kwargs):
             strategy=strategy,
             **kwargs
         )
+    except compose.project.ProjectError as pe:
+        ret["comment"] = pe.message if hasattr(pe, "message") else str(pe)
+        try:
+            tb = sys.exc_info()[2]
+            while tb.tb_next:
+                tb = tb.tb_next
+
+            errors = tb.tb_frame.f_locals['errors']
+            for cont, err in errors.items():
+                ret["changes"][cont] = err
+        except Exception:  # pylint: disable=broad-except
+            log.error(pe, exc_info=True)
+        return ret
+
     except Exception as e:  # pylint: disable=broad-except
         log.error(e, exc_info=True)
         ret["comment"] = e.message if hasattr(e, "message") else str(e)
