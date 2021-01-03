@@ -5,9 +5,9 @@ include:
   file.directory:
     - makedirs: true
 
-/volumes/teamspeak/query_ip_whitelist.txt:
+/volumes/teamspeak/query_ip_allowlist.txt:
   file.managed:
-    - source: salt://{{ slspath }}/files/query_ip_whitelist.txt
+    - source: salt://{{ slspath }}/files/query_ip_allowlist.txt
     - user: root
     - group: root
     - require:
@@ -27,7 +27,7 @@ include:
     - require:
       - sls: docker
 
-/volumes/jts3servermod:
+/volumes/jts3servermod/config:
   file.recurse:
     - source: salt://{{ slspath }}/files/jts3servermod/
     - template: jinja
@@ -42,5 +42,5 @@ teamspeak3:
     - name: /etc/docker-compose/teamspeak3/docker-compose.yaml
     - require:
       - file: /etc/docker-compose/teamspeak3/docker-compose.yaml
-      - file: /volumes/teamspeak/query_ip_whitelist.txt
-      - file: /volumes/jts3servermod
+      - file: /volumes/teamspeak/query_ip_allowlist.txt
+      - file: /volumes/jts3servermod/config

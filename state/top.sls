@@ -2,4 +2,4 @@
   '*':
     - users
   'web.spritsail.io':
-    - teamspeak
+    - teamspeak3
