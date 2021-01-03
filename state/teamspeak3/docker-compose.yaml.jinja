@@ -18,5 +18,6 @@ services:
     image: phaldan/jts3servermod
     container_name: jts3servermod
     volumes:
-      - /volumes/jts3servermod:/JTS3ServerMod/config
+      - /volumes/jts3servermod/config:/JTS3ServerMod/config
+      - /volumes/jts3servermod/log:/JTS3ServerMod/log
     restart: unless-stopped
