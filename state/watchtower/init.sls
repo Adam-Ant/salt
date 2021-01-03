@@ -3,7 +3,7 @@ include:
 
 /etc/docker-compose/watchtower/docker-compose.yaml:
   file.managed:
-    - source: salt://{{ slspath }}/docker-compose.jinja
+    - source: salt://{{ slspath }}/docker-compose.yaml.jinja
     - makedirs: true
     - user: root
     - group: root
