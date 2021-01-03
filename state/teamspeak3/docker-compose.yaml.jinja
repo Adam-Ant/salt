@@ -1,0 +1,22 @@
+version: '2.0'
+
+services:
+  teamspeak:
+    image: teamspeak:latest
+    container_name: teamspeak3
+    volumes:
+      - /volumes/teamspeak:/var/ts3server
+    environment:
+      - TS3SERVER_LICENSE=accept
+    ports:
+      - {{ bind_ip }}:9987:9987/udp
+      - {{ bind_ip }}:10011:10011
+      - {{ bind_ip }}:30033:30033
+    restart: unless-stopped
+
+  jts3servermod:
+    image: phaldan/jts3servermod
+    container_name: jts3servermod
+    volumes:
+      - /volumes/jts3servermod:/JTS3ServerMod/config
+    restart: unless-stopped
