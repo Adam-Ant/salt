@@ -42,5 +42,6 @@ teamspeak3:
     - name: /etc/docker-compose/teamspeak3/docker-compose.yaml
     - require:
       - file: /etc/docker-compose/teamspeak3/docker-compose.yaml
+    - watch:
       - file: /volumes/teamspeak/query_ip_allowlist.txt
       - file: /volumes/jts3servermod/config
