@@ -23,6 +23,17 @@ nginx_generic_includes:
     - file_mode: 644
     - clean: False
 
+nginx_certs:
+  file.recurse:
+    - name: /volumes/web/certs
+    - source: salt://{{ slspath }}/certs/
+    - makedirs: true
+    - user: root
+    - group: root
+    - dir_mode: 700
+    - file_mode: 600
+    - clean: False
+
 /etc/docker-compose/nginx/docker-compose.yaml:
   file.managed:
     - source: salt://{{ slspath }}/docker-compose.yaml.jinja
