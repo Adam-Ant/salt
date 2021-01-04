@@ -43,6 +43,8 @@ nginx_certs:
     - mode: 600
     - dirmode: 700
     - template: jinja
+
+nginx:
   dockercompose.up:
     - name: /etc/docker-compose/nginx/docker-compose.yaml
     - watch:
