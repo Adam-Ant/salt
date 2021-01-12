@@ -1,0 +1,30 @@
+version: '2.0'
+
+services:
+  wekan:
+    container_name: wekan
+    environment:
+      - MONGO_URL=mongodb://wekandb/wekan
+      - ROOT_URL=https://wekan.adam-ant.co.uk
+      - PORT=8080
+    image: wekanteam/wekan:v3.97
+    networks:
+      - nginx_proxy
+      - wekan
+    restart: on-failure:10
+
+  wekandb:
+    command: mongod --oplogSize 128
+    container_name: wekandb
+    image: mongo:latest
+    networks:
+      - wekan
+    restart: on-failure:10
+    volumes:
+      - /volumes/wekan:/data/db
+
+networks:
+  wekan:
+    driver: bridge
+  nginx_proxy:
+    external: true
