@@ -1,0 +1,30 @@
+version: "2.0"
+
+services:
+  quotes:
+    image: adamant/quotesdb
+    container_name: quotes
+    restart: on-failure:10
+    volumes:
+      - /volumes/quotes/config:/config
+    networks:
+      - default
+      - nginx_proxy
+
+  quotesdb:
+    image: mariadb:10
+    container_name: quotesdb
+    restart: on-failure:10
+    environment:
+      - MYSQL_USER={{ mysql_user }}
+      - MYSQL_PASSWORD={{ mysql_pass }}
+      - MYSQL_DATABASE=QuoteDB
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+    volumes:
+      - /volumes/quotes/database:/var/lib/mysql
+    networks:
+      - default
+
+networks:
+  nginx_proxy:
+    external: true
