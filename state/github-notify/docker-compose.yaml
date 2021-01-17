@@ -1,0 +1,16 @@
+version: '2.4'
+
+services:
+  mongo:
+    image: mongo
+    volumes:
+    - /volumes/github-notify/mongo:/data/db
+    restart: on-failure
+
+  notify-bot:
+    image: spritsail/github-releases-notify-bot
+    volumes:
+    - /volumes/github-notify/config.json:/config.json
+    depends_on:
+    - mongo
+    restart: on-failure
