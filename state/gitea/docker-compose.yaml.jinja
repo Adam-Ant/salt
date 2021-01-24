@@ -1,0 +1,25 @@
+version: "2"
+
+services:
+  server:
+    image: gitea/gitea:1
+    container_name: gitea
+    environment:
+      - APP_NAME=Spritsail Git Server
+      - DISABLE_REGISTRATION=true
+      - RUN_MODE=prod
+      - SECRET_KEY={{ secret_key }}
+      - SSH_DOMAIN=git.spritsail.io
+      - USER_GID={{ uid }}
+      - USER_UID={{ uid }}
+    networks:
+      - nginx_proxy
+    volumes:
+      - /volumes/gitea:/data
+    ports:
+      - "{{ bind_ip }}:22:22"
+    restart: unless-stopped
+
+networks:
+  nginx_proxy:
+    external: true
