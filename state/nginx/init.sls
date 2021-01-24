@@ -10,7 +10,7 @@ nginx_host_files:
     - group: root
     - dir_mode: 755
     - file_mode: 644
-    - clean: False
+    - clean: false
 
 nginx_generic_includes:
   file.recurse:
@@ -21,7 +21,7 @@ nginx_generic_includes:
     - group: root
     - dir_mode: 755
     - file_mode: 644
-    - clean: False
+    - clean: false
 
 nginx_certs:
   file.recurse:
@@ -32,7 +32,8 @@ nginx_certs:
     - group: root
     - dir_mode: 700
     - file_mode: 600
-    - clean: False
+    - clean: false
+    - show_changes: false
 
 /etc/docker-compose/nginx/docker-compose.yaml:
   file.managed:
