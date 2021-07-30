@@ -1,0 +1,130 @@
+# Still to do:
+# NZBGet Master - need a version source without pre-releases
+# Iodine IPTables Arg
+
+config:
+  access_token: {{ github_token }}
+
+spritsail/nzbhydra:
+  args:
+    NZBHYDRA_VER:
+      url: https://api.github.com/repos/theotherp/nzbhydra2/releases
+      structure: 0.tag_name
+      human_name: NZBHydra
+      strip_front: v
+    YQ_VER:
+      url: https://api.github.com/repos/mikefarah/yq/releases
+      structure: 0.tag_name
+      human_name: YQ
+
+spritsail/iodine:
+  args:
+    IODINE_VER:
+      url: https://api.github.com/repos/yarrick/iodine/tags
+      structure: 0.name
+      human_name: Iodine
+      strip_front: v
+    ZLIB_VER:
+      url: https://api.github.com/repos/madler/zlib/tags
+      structure: 0.name
+      human_name: ZLib
+      strip_front: v
+
+spritsail/beets:
+  args:
+    BEETS_VER:
+      url: https://api.github.com/repos/beetbox/beets/releases
+      structure: 0.tag_name
+      human_name: Beets
+      strip_front: v
+    CHROMAPRINT_VER:
+      url: https://api.github.com/repos/acoustid/chromaprint/releases
+      structure: 0.tag_name
+      human_name: Chromaprint
+      strip_front: v
+
+spritsail/jackett:
+  args:
+    JACKETT_VER:
+      url: https://api.github.com/repos/Jackett/Jackett/releases
+      structure: 0.tag_name
+      human_name: Jackett
+      strip_front: v
+
+spritsail/nzbget@testing:
+  args:
+    NZBGET_VER:
+      url: https://api.github.com/repos/nzbget/nzbget/releases
+      structure: 0.tag_name
+      human_name: NZBGet
+      strip_front: v
+
+spritsail/lidarr:
+  args:
+    LIDARR_VER:
+      url: https://api.github.com/repos/lidarr/lidarr/releases
+      structure: 0.tag_name
+      human_name: Lidarr
+      strip_front: v
+
+
+spritsail/radarr:
+  args:
+    RADARR_VER:
+      url: https://api.github.com/repos/radarr/radarr/releases
+      structure: 0.tag_name
+      human_name: Radarr
+      strip_front: v
+
+spritsail/sonarr:
+  args:
+    SONARR_VER:
+      url: https://api.github.com/repos/Sonarr/Sonarr/tags
+      structure: 0.name
+      human_name: Sonarr
+      strip_front: v
+
+spritsail/sonarr@beta:
+  args:
+    SONARR_VER:
+      url: https://services.sonarr.tv/v1/update/phantom-develop?os=linux
+      structure: updatePackage.version
+      human_name: Sonarr
+
+spritsail/tautulli:
+  args:
+    TAUTULLI_VER:
+      url: https://api.github.com/repos/Tautulli/Tautulli/releases
+      structure: 0.tag_name
+      human_name: Tautulli
+      strip_front: v
+
+spritsail/fivem:
+  args:
+    DATA_VER:
+      url: https://api.github.com/repos/citizenfx/cfx-server-data/commits
+      structure: 0.sha
+      human_name: CFX-Data
+
+spritsail/plex-media-server:
+  args:
+    PLEX_VER:
+      url: https://api.spritsail.io/plex/release
+      structure: version
+      human_name: Plex
+    PLEX_SHA:
+      url: https://api.spritsail.io/plex/release
+      structure: csum-deb
+      human_name: Plex-SHA
+
+spritsail/plex-media-server@pass:
+  args:
+    PLEX_VER:
+      url: https://api.spritsail.io/plex/release?pass
+      structure: version
+      human_name: Plex
+    PLEX_SHA:
+      url: https://api.spritsail.io/plex/release?pass
+      structure: csum-deb
+      human_name: SHA
+
