@@ -34,6 +34,7 @@ include:
 drone:
   dockercompose.up:
     - name: /etc/docker-compose/drone/docker-compose.yaml
+    - pull: true
     - require:
       - dockercompose: nginx
       - file: /etc/docker-compose/drone/docker-compose.yaml

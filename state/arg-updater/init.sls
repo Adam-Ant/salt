@@ -23,6 +23,7 @@ include:
     - dirmode: 755
   dockercompose.up:
     - name: /etc/docker-compose/arg-updater/docker-compose.yaml
+    - pull: true
     - require:
       - file: /etc/docker-compose/arg-updater/docker-compose.yaml
       - sls: docker
