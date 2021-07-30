@@ -5,5 +5,6 @@ services:
     container_name: arg-updater
     image: adamant/docker-arg-updater
     restart: on-failure:10
+    network_mode: bridge
     volumes:
       - /volumes/arg-updater:/config
