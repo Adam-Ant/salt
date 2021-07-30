@@ -7,7 +7,7 @@ services:
       - MONGO_URL=mongodb://wekandb/wekan
       - ROOT_URL=https://wekan.adam-ant.co.uk
       - PORT=8080
-    image: wekanteam/wekan:v5.26
+    image: wekanteam/wekan:v5.41
     networks:
       - nginx_proxy
       - wekan
