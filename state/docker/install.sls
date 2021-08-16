@@ -1,6 +1,6 @@
 docker_repo:
   pkgrepo.managed:
-    - name: deb https://download.docker.com/linux/debian buster stable
+    - name: deb https://download.docker.com/linux/debian {{ grains.oscodename }} stable
     - file: /etc/apt/sources.list.d/docker.list
     - key_url: https://download.docker.com/linux/debian/gpg
     - architectures: {{ grains.osarch }}
