@@ -4,6 +4,7 @@ docker_repo:
     - file: /etc/apt/sources.list.d/docker.list
     - key_url: https://download.docker.com/linux/debian/gpg
     - architectures: {{ grains.osarch }}
+    - refresh: true
 
 docker-deps:
   pkg.latest:
@@ -18,7 +19,7 @@ docker-ce:
     - version: {{ salt.pillar.get("docker:version", "latest") }}
 
 docker-compose:
-  pkg.installed:
+  pip.installed:
     - version: {{ salt.pillar.get("docker-compose:version", "latest") }}
 
 /etc/docker-compose:
