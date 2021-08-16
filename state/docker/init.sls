@@ -1,5 +1,6 @@
 include:
   - .install
+  - watchtower
 
 /etc/docker/daemon.json:
   file.serialize:
