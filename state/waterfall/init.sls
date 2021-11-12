@@ -1,7 +1,7 @@
 include:
   - docker
 
-/volumes/:
+/volumes/waterfall:
   file.directory:
     - user: 853
     - group: 853
@@ -9,7 +9,7 @@ include:
 
 /etc/docker-compose/waterfall/docker-compose.yaml:
   file.managed:
-    - source: salt://{{ slspath }}/docker-compose.yaml
+    - source: salt://{{ slspath }}/docker-compose.yaml.jinja
     - makedirs: true
     - user: root
     - group: root
