@@ -1,0 +1,14 @@
+{% set bind_ip = salt.pillar.get('waterfall:bind_ip', '0.0.0.0') %}
+
+version: "2.0"
+
+services:
+  nginx:
+    image: spritsail/waterfall:latest
+    container_name: waterfall
+    restart: unless-stopped
+    volumes:
+      - /volumes/waterfall:/config:rw
+    ports:
+      - {{ bind_ip }}:25501:25501
+
