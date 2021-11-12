@@ -13,4 +13,4 @@ teamspeak3:
   bind_ip: 51.38.73.115
 
 waterfall:
-  bind_ip: 54.37.6.105
+  bind_ip: 51.38.73.115
