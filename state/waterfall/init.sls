@@ -15,6 +15,8 @@ include:
     - group: root
     - mode: 600
     - dirmode: 700
+    - template: jinja
+
   dockercompose.up:
     - name: /etc/docker-compose/waterfall/docker-compose.yaml
     - require:
