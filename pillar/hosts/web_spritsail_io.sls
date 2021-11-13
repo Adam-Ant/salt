@@ -12,5 +12,5 @@ nginx:
 teamspeak3:
   bind_ip: 51.38.73.115
 
-waterfall:
+bungeecord:
   bind_ip: 51.38.73.115

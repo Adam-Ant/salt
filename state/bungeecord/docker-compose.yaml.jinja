@@ -1,0 +1,15 @@
+{%- set bind_ip = salt.pillar.get('bungeecord:bind_ip', '0.0.0.0') -%}
+{%- set bind_port = salt.pillar.get('bungeecord:bind_port', '25501') -%}
+
+version: "2.0"
+
+services:
+  bungeecord:
+    image: spritsail/bungeecord:latest
+    container_name: bungeecord
+    restart: unless-stopped
+    volumes:
+      - /volumes/bungeecord:/config:rw
+    ports:
+      - {{ bind_ip }}:{{ bind_port }}:{{ bind_port }}
+

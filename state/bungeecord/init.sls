@@ -1,13 +1,13 @@
 include:
   - docker
 
-/volumes/waterfall:
+/volumes/bungeecord:
   file.directory:
     - user: 853
     - group: 853
     - mode: 755
 
-/etc/docker-compose/waterfall/docker-compose.yaml:
+/etc/docker-compose/bungeecord/docker-compose.yaml:
   file.managed:
     - source: salt://{{ slspath }}/docker-compose.yaml.jinja
     - makedirs: true
@@ -18,7 +18,8 @@ include:
     - template: jinja
 
   dockercompose.up:
-    - name: /etc/docker-compose/waterfall/docker-compose.yaml
+    - pull: true
     - require:
-      - file: /etc/docker-compose/waterfall/docker-compose.yaml
+      - file: /etc/docker-compose/bungeecord/docker-compose.yaml
+      - file: /volumes/bungeecord
       - sls: docker
