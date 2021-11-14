@@ -2,11 +2,11 @@ version: "2.0"
 
 services:
   creative:
-    image: spritsail/minecraft:1.17
+    image: spritsail/minecraft:latest
     container_name: minecraft-creative
     restart: unless-stopped
     volumes:
-      - /volumes/minecraft-creative:/config:rw
+      - /volumes/minecraft-creative:/mc:rw
     ports:
       - 25502:25565
     environment:
