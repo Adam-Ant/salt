@@ -11,6 +11,7 @@ docker-deps:
     - pkgs:
       - ca-certificates
       - docker-ce-cli
+      - python3-pip
     - require:
       - pkgrepo: docker_repo
 
