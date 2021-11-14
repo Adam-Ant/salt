@@ -9,3 +9,5 @@
     - arg-updater
     - drone
     - bungeecord
+  'DockerGames.lan':
+    - minecraft-creative

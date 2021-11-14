@@ -1,0 +1,16 @@
+version: "2.0"
+
+services:
+  creative:
+    image: spritsail/minecraft:1.17
+    container_name: minecraft-creative
+    restart: unless-stopped
+    volumes:
+      - /volumes/minecraft-creative:/config:rw
+    ports:
+      - 25502:25565
+    environment:
+      - INIT_MEM=512M
+      - MAX_MEM=4G
+      - SERVER_JAR=/mc/paper.jar
+
