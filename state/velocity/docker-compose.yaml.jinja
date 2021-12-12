@@ -1,0 +1,15 @@
+{%- set bind_ip = salt.pillar.get('velocity:bind_ip', '0.0.0.0') -%}
+{%- set bind_port = salt.pillar.get('velocity:bind_port', '25501') -%}
+
+version: "2.0"
+
+services:
+  velocity:
+    image: spritsail/velocity:latest
+    container_name: velocity
+    restart: unless-stopped
+    volumes:
+      - /volumes/velocity:/config:rw
+    ports:
+      - {{ bind_ip }}:{{ bind_port }}:{{ bind_port }}
+

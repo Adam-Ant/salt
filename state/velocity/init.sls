@@ -1,13 +1,11 @@
 include:
   - docker
 
-/volumes/bungeecord:
+/volumes/velocity:
   file.directory:
-    - user: 853
-    - group: 853
     - mode: 755
 
-/etc/docker-compose/bungeecord/docker-compose.yaml:
+/etc/docker-compose/velocity/docker-compose.yaml:
   file.managed:
     - source: salt://{{ slspath }}/docker-compose.yaml.jinja
     - makedirs: true
@@ -20,6 +18,6 @@ include:
   dockercompose.up:
     - pull: true
     - require:
-      - file: /etc/docker-compose/bungeecord/docker-compose.yaml
-      - file: /volumes/bungeecord
+      - file: /etc/docker-compose/velocity/docker-compose.yaml
+      - file: /volumes/velocity
       - sls: docker

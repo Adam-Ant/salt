@@ -12,5 +12,5 @@ nginx:
 teamspeak3:
   bind_ip: 51.38.73.115
 
-bungeecord:
+velocity:
   bind_ip: 51.38.73.115

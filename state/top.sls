@@ -8,6 +8,6 @@
     - wekan
     - arg-updater
     - drone
-    - bungeecord
+    - velocity
   'DockerGames.lan':
     - minecraft-creative
