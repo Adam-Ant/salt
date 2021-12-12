@@ -11,3 +11,4 @@
     - velocity
   'DockerGames.lan':
     - minecraft-creative
+    - minecraft-archive

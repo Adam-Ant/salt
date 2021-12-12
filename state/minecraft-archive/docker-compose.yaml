@@ -1,0 +1,16 @@
+version: "2.0"
+
+services:
+  creative:
+    image: spritsail/minecraft:latest
+    container_name: minecraft-archive
+    restart: unless-stopped
+    volumes:
+      - /volumes/minecraft-archive:/mc:rw
+    ports:
+      - 25503:25565
+    environment:
+      - INIT_MEM=512M
+      - MAX_MEM=3G
+      - SERVER_JAR=/mc/paper.jar
+
