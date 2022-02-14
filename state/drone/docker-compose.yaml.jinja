@@ -12,6 +12,7 @@ services:
       - DRONE_GITHUB_CLIENT_ID={{ github_client_id }}
       - DRONE_GITHUB_CLIENT_SECRET={{ github_client_secret }}
       - DRONE_RUNNER_CAPACITY=1
+      - DRONE_REGISTRATION_CLOSED=true
       - DRONE_SERVER_HOST=drone.spritsail.io
       - DRONE_SERVER_PROXY_PROTO=https
       - DRONE_DATABASE_DATASOURCE=/var/lib/drone/drone.sqlite
