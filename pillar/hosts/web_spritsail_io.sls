@@ -14,3 +14,4 @@ teamspeak3:
 
 velocity:
   bind_ip: 51.38.73.115
+  geyser_port: 19132
