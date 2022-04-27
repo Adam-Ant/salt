@@ -19,3 +19,4 @@ services:
       - {{ bind_ip }}:{{ geyser_port }}:{{ geyser_port }}/udp
 {%- endif %}
       - '[::]:{{ metrics_port }}:{{ metrics_port }}'
+    network_mode: bridge
