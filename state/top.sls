@@ -9,6 +9,7 @@
     - arg-updater
     - drone
     - velocity
+    - registry
   'DockerGames.lan':
     - minecraft-creative
     - minecraft-archive
