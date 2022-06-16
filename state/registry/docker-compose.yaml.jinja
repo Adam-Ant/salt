@@ -1,0 +1,24 @@
+version: '2.0'
+
+services:
+  drone:
+    image: registry:2
+    container_name: docker-registry
+    volumes:
+      - /volumes/registry/data:/var/lib/registry
+      - /volumes/registry/htpasswd:/etc/htpasswd:ro
+    environment:
+        # Enable authenticated deleting of images & manifests. Used for cleanup.
+      - REGISTRY_STORAGE_DELETE_ENABLED=true
+        # Enable authentication
+      - REGISTRY_AUTH_HTPASSWD_PATH=/etc/htpasswd
+      - REGISTRY_AUTH_HTPASSWD_REALM=basic-realm
+        # Keeps frebib happy
+      - REGISTRY_PROMETHEUS_ENABLED=true
+    networks:
+      - nginx_proxy
+    restart: unless-stopped
+
+networks:
+  nginx_proxy:
+    external: true
