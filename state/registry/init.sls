@@ -26,7 +26,7 @@ include:
     - group: root
     - mode: 0600
     - contents: |
-{%- for entry in pillar.registry.htpasswd.items() %}
+{%- for entry in pillar.registry.htpasswd %}
         {{ entry }}
 {%- endfor %}
 
