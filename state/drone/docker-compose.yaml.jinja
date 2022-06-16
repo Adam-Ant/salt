@@ -48,7 +48,7 @@ services:
     restart: unless-stopped
 
   drone-notify:
-    image: adamant/drone-notify
+    image: spritsail/drone-notify
     container_name: drone-notify
     volumes:
       - /volumes/drone-notify:/config
