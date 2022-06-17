@@ -4,8 +4,6 @@ services:
   drone:
     image: spritsail/drone
     container_name: drone-server
-    depends_on:
-      - drone-starlark
     volumes:
       - /volumes/drone:/var/lib/drone/
     environment:
@@ -16,15 +14,13 @@ services:
       - DRONE_SERVER_HOST=drone.spritsail.io
       - DRONE_SERVER_PROXY_PROTO=https
       - DRONE_DATABASE_DATASOURCE=/var/lib/drone/drone.sqlite
+      - DRONE_STARLARK_ENABLED=true
+
 
       # Configuration for remote agents
       - DRONE_AGENTS_ENABLED=true
       - DRONE_RPC_PROTO=https
       - DRONE_RPC_SECRET={{ rpc_secret }}
-
-      # Starlark conversion plugin
-      - DRONE_CONVERT_PLUGIN_ENDPOINT=http://drone-starlark:3000
-      - DRONE_CONVERT_PLUGIN_SECRET={{ starlark_secret }}
 
       # Logging configuration
       - DRONE_LOGS_DEBUG=true
@@ -35,16 +31,6 @@ services:
     networks:
       - drone
       - nginx_proxy
-    restart: unless-stopped
-
-  drone-starlark:
-    image: drone/drone-convert-starlark
-    container_name: drone-starlark
-    environment:
-      - DRONE_DEBUG=true
-      - DRONE_SECRET={{ starlark_secret }}
-    networks:
-      - drone
     restart: unless-stopped
 
   drone-notify:
