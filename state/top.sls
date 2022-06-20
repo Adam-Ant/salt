@@ -13,3 +13,5 @@
   'DockerGames.lan':
     - minecraft-creative
     - minecraft-archive
+  'PiCluster-*.lan':
+    - swarm
