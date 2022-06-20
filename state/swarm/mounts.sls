@@ -6,19 +6,18 @@ include:
     - fs_type: ext4
 
 /var/lib/docker:
-  mount.fstab_present:
-    - name: /dev/mmcblk0
-    - fs_file: /var/lib/docker
-    - fs_vfstype: ext4
+  mount.mounted:
+    - device: /dev/mmcblk0
+    - fstype: ext4
+    - mkmnt: True
     - require:
       - blockdev: /dev/mmcblk0
     - watch_in:
       - service: docker
 
 
-tmpfs:
-  mount.fstab_present:
-    - name: tmpfs
-    - fs_file: /tmp
-    - fs_vfstype: tmpfs
-    - fs_mntops: rw,mode=1777,size=4g
+/tmp:
+  mount.mounted:
+    - device: tmpfs
+    - fstype: tmpfs
+    - ops: rw,mode=1777,size=4g
