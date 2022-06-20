@@ -1,3 +1,6 @@
+include:
+  - docker
+
 /dev/mmcblk0:
   blockdev.formatted:
     - fs_type: ext4
@@ -9,6 +12,8 @@
     - fs_vfstype: ext4
     - require:
       - blockdev: /dev/mmcblk0
+    - watch_in:
+      - service: docker
 
 
 tmpfs:
