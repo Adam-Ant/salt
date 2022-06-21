@@ -1,3 +1,6 @@
+include:
+- apt
+
 docker_repo:
   pkgrepo.managed:
     - name: deb https://download.docker.com/linux/debian {{ grains.oscodename }} stable
@@ -13,11 +16,14 @@ docker-deps:
       - docker-ce-cli
       - python3-pip
     - require:
+      - sls: apt
       - pkgrepo: docker_repo
 
 docker-ce:
   pkg.installed:
     - version: {{ salt.pillar.get("docker:version", "latest") }}
+    - require:
+      - pkg: docker-deps
 
 docker-compose:
   pip.installed:
