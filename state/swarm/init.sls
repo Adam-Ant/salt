@@ -13,7 +13,7 @@ join swarm:
       - pkg: python3-docker
     - onlyif:
       - fun: cmd.retcode
-        cmd: {%raw%}'docker info --format "{{eq .Swarm.NodeID \"\"}}" | grep -qFw false'{%endraw%}
+        cmd: {%raw%}'set -o pipefail; docker info --format "{{eq .Swarm.NodeID \"\"}}" | grep -qFw false'{%endraw%}
         python_shell: true
         hide_output: true
         ignore_retcode: true
