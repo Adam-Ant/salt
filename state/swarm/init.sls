@@ -7,9 +7,10 @@ python3-docker:
     - version: latest
 
 join swarm:
-  swarm.joinswarm:
-    - remoteaddr: {{ pillar.swarm.master }}
-    - token: {{ pillar.swarm.token }}
+  module.run:
+    - swarm.joinswarm:
+      - remoteaddr: {{ pillar.swarm.master }}
+      - token: {{ pillar.swarm.token }}
     - require:
       - pkg: python3-docker
     - onlyif:
