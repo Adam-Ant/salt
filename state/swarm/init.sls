@@ -16,6 +16,7 @@ join swarm:
     - onlyif:
       - fun: cmd.retcode
         cmd: {%raw%}'docker info --format "{{eq .Swarm.NodeID \"\"}}" | grep -qFw true'{%endraw%}
+        python_shell: true
         hide_output: true
         ignore_retcode: true
 
