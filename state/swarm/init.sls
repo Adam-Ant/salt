@@ -9,7 +9,7 @@ python3-docker:
 join swarm:
   module.run:
     - swarm.joinswarm:
-      - remoteaddr: {{ pillar.swarm.master }}
+      - remote_addr: {{ pillar.swarm.master }}
       - token: {{ pillar.swarm.token }}
     - require:
       - pkg: python3-docker
