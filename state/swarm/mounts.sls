@@ -21,3 +21,11 @@ include:
     - device: tmpfs
     - fstype: tmpfs
     - ops: rw,mode=1777,size=4g
+
+
+/volumes:
+  mount.mounted:
+    - device: 192.168.1.2:/mnt/vm/services
+    - fstype: nfs
+    - mkmnt: True
+    - ops: rw
