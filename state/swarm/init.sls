@@ -6,6 +6,10 @@ python3-docker:
   pkg.installed:
     - version: latest
 
+nfs-common:
+  pkg.installed:
+    - version: latest
+
 join swarm:
   cmd.run:
     - name: "docker swarm join --token {{ pillar.swarm.token }} {{ pillar.swarm.master }}"
