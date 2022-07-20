@@ -1,6 +1,7 @@
 include:
   - docker
 
+{% if grains['osarch'] == 'arm64' %}
 /dev/mmcblk0:
   blockdev.formatted:
     - fs_type: ext4
@@ -14,7 +15,7 @@ include:
       - blockdev: /dev/mmcblk0
     - watch_in:
       - service: docker
-
+{% endif %}
 
 /tmp:
   mount.mounted:
