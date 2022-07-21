@@ -30,3 +30,15 @@ include:
     - fstype: nfs
     - mkmnt: True
     - ops: rw
+    - require:
+      - pkg: nfs-common
+
+/volumes/swarm-files:
+  file.directory:
+    - user: root
+    - group: root
+    - dirmode: 755
+    - file_mode: 600
+    - require:
+      - mount: /volumes
+
