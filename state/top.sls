@@ -15,3 +15,5 @@
     - minecraft-archive
   'PiCluster-*':
     - swarm
+  'DockerSwarm':
+    - swarm
