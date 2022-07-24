@@ -33,6 +33,15 @@ include:
     - require:
       - pkg: nfs-common
 
+/mnt/media:
+  mount.mounted:
+    - device: 192.168.1.3:/mnt/user/media
+    - fstype: nfs
+    - mkmnt: True
+    - ops: rw
+    - require:
+      - pkg: nfs-common
+
 /volumes/swarm-files:
   file.directory:
     - user: root
