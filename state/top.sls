@@ -17,3 +17,4 @@
     - swarm
   'DockerSwarm':
     - swarm
+    - home-assistant

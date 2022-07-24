@@ -1,0 +1,40 @@
+version: '3.9'
+services:
+
+  homeassistant:
+    image: homeassistant/home-assistant
+    volumes:
+      - /volumes/ha/hass/:/config
+      - /mnt/media/:/mnt/media
+    environment:
+      - TZ=Europe/London
+    deploy:
+      restart_policy:
+        delay: 10s
+        window: 10s
+    ports:
+      - 8123:8123
+
+  zigbee2mqtt:
+    environment:
+      - TZ=Europe/London
+    image: koenkk/zigbee2mqtt
+    deploy:
+      restart_policy:
+        delay: 10s
+        window: 10s
+    ports:
+      - 8080:8080
+    volumes:
+      - /volumes/ha/zigbee/:/app/data
+
+  mosquitto:
+    image: eclipse-mosquitto
+    ports:
+      - 1883:1883
+    volumes:
+      - /volumes/ha/mosquitto/:/mosquitto
+    deploy:
+      restart_policy:
+        delay: 10s
+        window: 10s
