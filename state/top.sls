@@ -18,3 +18,4 @@
   'DockerSwarm':
     - swarm
     - home-assistant
+    - nginx-swarm

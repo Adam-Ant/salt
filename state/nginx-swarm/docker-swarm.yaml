@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - /volumes/nginx/certs:/certs
+      - /volumes/nginx/conf:/etc/nginx/conf.d
+    ports:
+      - 443:443
+      - 80:80
+    deploy:
+      restart_policy:
+        delay: 10s
+        window: 10s
+      replicas: 3
+      update_config:
+        parallelism: 1
+        delay: 10s
+        failure_action: pause
+        order: stop-first
