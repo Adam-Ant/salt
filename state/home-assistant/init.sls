@@ -10,7 +10,7 @@ home-assistant-directories:
       - /volumes/ha/hass
       - /volumes/ha/zigbee
 
-/volumes/salt-files/ha.yaml:
+/volumes/swarm-files/ha.yaml:
   file.managed:
     - source: salt://{{ slspath }}/docker-swarm.yaml
     - makedirs: true
