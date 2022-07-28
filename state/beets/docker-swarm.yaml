@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  beets:
+    image: spritsail/beets:latest
+    volumes:
+      - /volumes/beets:/config
+      - /mnt/media:/mnt/media
+    deploy:
+      restart_policy:
+        delay: 10s
+        window: 10s
+    ports:
+      - 8337:8337

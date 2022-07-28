@@ -20,3 +20,4 @@
     - home-assistant
     - nginx-swarm
     - bitwarden
+    - beets

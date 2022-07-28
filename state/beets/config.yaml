@@ -1,0 +1,23 @@
+# This file managed by Salt
+import:
+  write: yes
+  move: yes
+
+match:
+  preferred:
+    countries: ['GB|UK', 'US']
+    media: ['CD', 'Digital Media|File']
+    original_year: yes
+
+directory: /mnt/media/Music
+library: /config/library.db
+plugins: web chroma discogs smartplaylist
+asciify_paths: true
+color: yes
+
+smartplaylist:
+  playlist_dir: /config/playlists
+  playlists:
+    - name: all.m3u
+      query: ''
+
