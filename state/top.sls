@@ -19,3 +19,4 @@
     - swarm
     - home-assistant
     - nginx-swarm
+    - bitwarden

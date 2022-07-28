@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  bitwarden:
+    image: vaultwarden/server:latest
+    volumes:
+      - /volumes/bitwarden:/data
+    deploy:
+      restart_policy:
+        delay: 10s
+        window: 10s
+    networks:
+      - nginx_frontend
+    environment:
+      WEBSOCKET_ENABLED: 'true'
+      SIGNUPS_ALLOWED: 'false'
+      INVITATIONS_ALLOWED: 'true'
+      #ADMIN_TOKEN: 'TokenToEnableAdminPanel'
+      DOMAIN: 'https://bitwarden.adam-ant.co.uk'
+      SHOW_PASSWORD_HINT: 'false'
+
+
+
+networks:
+  nginx_frontend:
+    external: true
