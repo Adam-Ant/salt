@@ -12,8 +12,9 @@ services:
       restart_policy:
         delay: 10s
         window: 10s
-    ports:
-      - 8123:8123
+    networks:
+      - default
+      - nginx_frontend
 
   zigbee2mqtt:
     environment:
@@ -38,3 +39,7 @@ services:
       restart_policy:
         delay: 10s
         window: 10s
+
+networks:
+  nginx_frontend:
+    external: true

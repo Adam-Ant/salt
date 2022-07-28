@@ -9,6 +9,9 @@ services:
     ports:
       - 443:443
       - 80:80
+    networks:
+      - default
+      - frontend
     deploy:
       restart_policy:
         delay: 10s
@@ -19,3 +22,6 @@ services:
         delay: 10s
         failure_action: pause
         order: stop-first
+
+networks:
+  frontend:
