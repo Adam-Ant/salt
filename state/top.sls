@@ -2,6 +2,7 @@
   '*':
     - users
   'web.spritsail.io':
+    - watchtower
     - gitea
     - imageinfo
     - teamspeak3
@@ -11,6 +12,7 @@
     - velocity
     - registry
   'DockerGames.lan':
+    - watchtower
     - minecraft-creative
     - minecraft-archive
   'PiCluster-*':
