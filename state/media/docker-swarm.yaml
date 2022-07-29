@@ -1,0 +1,93 @@
+version: '3.9'
+
+services:
+
+  organizr:
+    image: organizr/organizr
+    volumes:
+      - /volumes/media/organizr:/config
+    environment:
+      - "branch=v2-master"
+    networks:
+      - nginx_frontend
+
+  nzbget:
+    image: spritsail/nzbget
+    volumes:
+      - /volumes/media/nzbget:/config
+      - /mnt/media:/media
+    networks:
+      - nginx_frontend
+
+  hydra:
+    image: spritsail/nzbhydra
+    volumes:
+      - /volumes/media/hydra:/config
+    networks:
+      - nginx_frontend
+
+  sonarr:
+    image: spritsail/sonarr
+    volumes:
+      - /volumes/media/sonarr:/config
+      - /mnt/media:/media
+    networks:
+      - nginx_frontend
+
+  radarr:
+    image: spritsail/radarr
+    volumes:
+      - /volumes/media/radarr:/config
+      - /mnt/media:/media
+    environment:
+      - "URL_BASE=/radarr"
+    networks:
+      - nginx_frontend
+
+  lidarr:
+    image: spritsail/lidarr
+    volumes:
+      - /volumes/media/lidarr:/config
+      - /mnt/media:/media
+    networks:
+      - nginx_frontend
+
+  tautulli:
+    image: spritsail/tautulli
+    volumes:
+      - /volumes/media/tautulli:/config
+    networks:
+      - nginx_frontend
+
+#    plex:
+#      image: spritsail/plex-media-server:plexpass
+#      volumes:
+#        - /volumes/media/plex:/config
+#        - /mnt/media:/media
+#      ports:
+#        - "1900:1900/udp"
+#        - "3005:3005"
+#        - "5353:5353/udp"
+#        - "8324:8324"
+#        - "32400:32400"
+#        - "32410:32410/udp"
+#        - "32412-32414:32412-32414/udp"
+#        - "32469:32469"
+#      networks:
+#        - nginx_frontend
+#
+#    jellyfin:
+#      image: jellyfin/jellyfin:latest
+#      volumes:
+#        - /volumes/media/jellyfin/config:/config
+#        - /volumes/media/jellyfin/cache:/cache
+#        - /mnt/media:/media
+#      ports:
+#        - "1900:1900"
+#        - "7359:7359/udp"
+#      networks:
+#        - nginx_frontend
+
+networks:
+  nginx_frontend:
+    external: true
