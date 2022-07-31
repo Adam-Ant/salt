@@ -2,21 +2,27 @@ include:
 - swarm
 - nginx-swarm
 
-media-directories:
+{% set uidPairs = {
+  'organizr': 'root',
+  'nzbget':   901,
+  'hydra':    911,
+  'sonarr':   921,
+  'radarr':   922,
+  'lidarr':   923,
+  'tautulli': 951
+%}
+
+
+{% for file, uid in uidPairs.items() %}
+/volumes/media/{{file}}:
   file.directory:
     - makedirs: true
-    - user: root
-    - group: root
-    - names:
-      - /volumes/media/organizr
-      - /volumes/media/nzbget
-      - /volumes/media/hydra
-      - /volumes/media/sonarr
-      - /volumes/media/radarr
-      - /volumes/media/lidarr
-      - /volumes/media/tautulli
-      - /volumes/media/plex
-      - /volumes/media/jellyfin
+    - user: {{ uid }}
+    - group: {{ uid }}
+    - recurse:
+      - user
+      - group
+{% endfor %}
 
 /volumes/swarm-files/media.yaml:
   file.managed:
