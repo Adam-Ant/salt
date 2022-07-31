@@ -23,3 +23,4 @@
     - nginx-swarm
     - bitwarden
     - beets
+    - media
