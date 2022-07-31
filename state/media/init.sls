@@ -10,7 +10,7 @@ include:
   'radarr':   922,
   'lidarr':   923,
   'tautulli': 951
-%}
+} %}
 
 
 {% for file, uid in uidPairs.items() %}
