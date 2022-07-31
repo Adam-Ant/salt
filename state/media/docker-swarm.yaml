@@ -16,6 +16,9 @@ services:
     volumes:
       - /volumes/media/nzbget:/config
       - /mnt/media:/media
+    environment:
+      - "SUID=901"
+      - "GUID=901"
     networks:
       - nginx_frontend
 
@@ -23,6 +26,9 @@ services:
     image: spritsail/nzbhydra
     volumes:
       - /volumes/media/hydra:/config
+    environment:
+      - "SUID=911"
+      - "GUID=911"
     networks:
       - nginx_frontend
 
@@ -31,6 +37,9 @@ services:
     volumes:
       - /volumes/media/sonarr:/config
       - /mnt/media:/media
+    environment:
+      - "SUID=921"
+      - "GUID=921"
     networks:
       - nginx_frontend
 
@@ -41,6 +50,8 @@ services:
       - /mnt/media:/media
     environment:
       - "URL_BASE=/radarr"
+      - "SUID=922"
+      - "GUID=922"
     networks:
       - nginx_frontend
 
@@ -49,6 +60,9 @@ services:
     volumes:
       - /volumes/media/lidarr:/config
       - /mnt/media:/media
+    environment:
+      - "SUID=923"
+      - "GUID=923"
     networks:
       - nginx_frontend
 
@@ -56,6 +70,9 @@ services:
     image: spritsail/tautulli
     volumes:
       - /volumes/media/tautulli:/config
+    environment:
+      - "SUID=951"
+      - "GUID=951"
     networks:
       - nginx_frontend
 
