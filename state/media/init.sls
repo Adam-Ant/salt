@@ -5,7 +5,7 @@ include:
 {% set uidPairs = {
   'organizr': 'root',
   'nzbget':   901,
-  'hydra':    911,
+  'prowlarr': 911,
   'sonarr':   921,
   'radarr':   922,
   'lidarr':   923,

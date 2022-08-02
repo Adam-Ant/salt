@@ -22,10 +22,10 @@ services:
     networks:
       - nginx_frontend
 
-  hydra:
-    image: spritsail/nzbhydra
+  prowlarr:
+    image: spritsail/prowlarr
     volumes:
-      - /volumes/media/hydra:/config
+      - /volumes/media/prowlarr:/config
     environment:
       - "SUID=911"
       - "GUID=911"
