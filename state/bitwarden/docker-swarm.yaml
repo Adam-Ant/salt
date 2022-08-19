@@ -9,8 +9,9 @@ services:
       restart_policy:
         delay: 10s
         window: 10s
-    networks:
-      - nginx_frontend
+      label:
+        - "traefik.enable=true"
+        - "traefik.http.routers.bitwarden.rule=Host(`bitwarden.adam-ant.co.uk`)"
     environment:
       WEBSOCKET_ENABLED: 'true'
       SIGNUPS_ALLOWED: 'false'
@@ -19,8 +20,7 @@ services:
       DOMAIN: 'https://bitwarden.adam-ant.co.uk'
       SHOW_PASSWORD_HINT: 'false'
 
-
-
 networks:
-  nginx_frontend:
+  default:
+    name: network_public
     external: true
