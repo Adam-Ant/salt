@@ -4,8 +4,8 @@ include:
 
 traefik_config_files:
   file.recurse:
-    - name: /volumes/traefik/conf
-    - source: salt://{{ slspath }}/configs/
+    - name: /volumes/traefik/config
+    - source: salt://{{ slspath }}/config/
     - makedirs: true
     - user: root
     - group: root
