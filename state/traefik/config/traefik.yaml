@@ -4,7 +4,7 @@ providers:
     exposedByDefault: false
     endpoint: "unix:///var/run/docker.sock"
     swarmMode: false
-    network: traefik_public
+    network: network_public
 
   file:
     watch: true

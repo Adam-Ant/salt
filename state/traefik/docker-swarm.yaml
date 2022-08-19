@@ -26,6 +26,6 @@ services:
 
 networks:
   default:
-    name: traefik_public
+    name: network_public
     external: true
 

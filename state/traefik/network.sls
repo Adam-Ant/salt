@@ -1,7 +1,7 @@
 include:
   - swarm
 
-/volumes/swarm-files/traefik-net.yaml:
+/volumes/swarm-files/network.yaml:
   file.managed:
     - source: salt://{{ slspath }}/network.yaml
     - makedirs: true
