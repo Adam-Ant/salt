@@ -24,3 +24,4 @@
     - bitwarden
     - beets
     - media
+    - traefik

@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  traefik:
+    image: traefik
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: host
+      - target: 443
+        published: 443
+        protocol: tcp
+        mode: host
+      - target: 8080
+        published: 8080
+        protocol: tcp
+    volumes:
+      - "/volumes/traefik/config:/etc/traefik"
+      - "/volumes/traefik/certs:/certs"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.role == manager]
+
+networks:
+  default:
+    name: traefik_public
+    external: true
+
