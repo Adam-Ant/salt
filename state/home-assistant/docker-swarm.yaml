@@ -15,7 +15,7 @@ services:
       labels:
         - "traefik.enable=true"
         - "traefik.http.routers.homeassistant.rule=Host(`ha.adam-ant.co.uk`)"
-        - "traefik.http.servuces.homeassistant.server.port=8123"
+        - "traefik.http.services.homeassistant.server.port=8123"
     networks:
       - default
       - network_public
