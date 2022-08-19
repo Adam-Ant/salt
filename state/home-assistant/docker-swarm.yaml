@@ -12,9 +12,12 @@ services:
       restart_policy:
         delay: 10s
         window: 10s
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.homeassistant.rule=Host(`ha.adam-ant.co.uk`)"
     networks:
       - default
-      - nginx_frontend
+      - network_public
 
   zigbee2mqtt:
     environment:
@@ -41,5 +44,5 @@ services:
         window: 10s
 
 networks:
-  nginx_frontend:
+  network_public:
     external: true
