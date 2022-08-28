@@ -41,6 +41,12 @@ services:
     environment:
       - "SUID=921"
       - "GUID=921"
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.sonarr.rule=Host(`media.adam-ant.co.uk`) && Path(`/sonarr`)"
+        - "traefik.http.routers.sonarr.middlewares=authelia@file"
+        - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
 
   radarr:
     image: spritsail/radarr
