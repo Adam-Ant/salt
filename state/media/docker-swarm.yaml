@@ -8,6 +8,8 @@ services:
       - /volumes/media/organizr:/config
     environment:
       - "branch=v2-master"
+      - "PUID=971"
+      - "PGID=971"
     deploy:
       labels:
         - "traefik.enable=true"
