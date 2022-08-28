@@ -25,3 +25,4 @@
     - beets
     - media
     - traefik
+    - authelia
