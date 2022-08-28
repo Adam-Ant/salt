@@ -27,7 +27,7 @@ services:
     deploy:
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.nzbget.rule=Host(`media.adam-ant.co.uk`) && Path(`/nzbget`)"
+        - "traefik.http.routers.nzbget.rule=Host(`media.adam-ant.co.uk`) && PathPrefix(`/nzbget`)"
         - "traefik.http.routers.nzbget.middlewares=authelia@file"
         - "traefik.http.services.nzbget.loadbalancer.server.port=6789"
 
@@ -50,7 +50,7 @@ services:
     deploy:
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.sonarr.rule=Host(`media.adam-ant.co.uk`) && Path(`/sonarr`)"
+        - "traefik.http.routers.sonarr.rule=Host(`media.adam-ant.co.uk`) && PathPrefix(`/sonarr`)"
         - "traefik.http.routers.sonarr.middlewares=authelia@file"
         - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
 
