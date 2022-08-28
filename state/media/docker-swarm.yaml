@@ -24,8 +24,6 @@ services:
     environment:
       - "SUID=901"
       - "GUID=901"
-    networks:
-      - nginx_frontend
 
   prowlarr:
     image: spritsail/prowlarr
@@ -34,8 +32,6 @@ services:
     environment:
       - "SUID=911"
       - "GUID=911"
-    networks:
-      - nginx_frontend
 
   sonarr:
     image: spritsail/sonarr
@@ -45,8 +41,6 @@ services:
     environment:
       - "SUID=921"
       - "GUID=921"
-    networks:
-      - nginx_frontend
 
   radarr:
     image: spritsail/radarr
@@ -57,8 +51,6 @@ services:
       - "URL_BASE=/radarr"
       - "SUID=922"
       - "GUID=922"
-    networks:
-      - nginx_frontend
 
   lidarr:
     image: spritsail/lidarr
@@ -68,8 +60,6 @@ services:
     environment:
       - "SUID=923"
       - "GUID=923"
-    networks:
-      - nginx_frontend
 
   tautulli:
     image: spritsail/tautulli
@@ -78,8 +68,6 @@ services:
     environment:
       - "SUID=951"
       - "GUID=951"
-    networks:
-      - nginx_frontend
 
 #    plex:
 #      image: spritsail/plex-media-server:plexpass
@@ -95,8 +83,6 @@ services:
 #        - "32410:32410/udp"
 #        - "32412-32414:32412-32414/udp"
 #        - "32469:32469"
-#      networks:
-#        - nginx_frontend
 #
 #    jellyfin:
 #      image: jellyfin/jellyfin:latest
@@ -107,8 +93,6 @@ services:
 #      ports:
 #        - "1900:1900"
 #        - "7359:7359/udp"
-#      networks:
-#        - nginx_frontend
 
 networks:
   default:
