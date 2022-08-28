@@ -6,7 +6,7 @@ include:
   file.managed:
     - source: salt://{{ slspath }}/configuration.yaml.jinja
     - template: jinja
-    - context: {{ pillar.authelia | drone }}
+    - context: {{ pillar.authelia | json }}
     - makedirs: true
     - mode: 0600
     - dirmode: 0700
