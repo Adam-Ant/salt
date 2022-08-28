@@ -24,6 +24,12 @@ services:
     environment:
       - "SUID=901"
       - "GUID=901"
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.nzbget.rule=Host(`media.adam-ant.co.uk`) && Path(`/nzbget`)"
+        - "traefik.http.routers.nzbget.middlewares=authelia@file"
+        - "traefik.http.services.nzbget.loadbalancer.server.port=6789"
 
   prowlarr:
     image: spritsail/prowlarr
