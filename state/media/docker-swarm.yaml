@@ -38,6 +38,12 @@ services:
     environment:
       - "SUID=911"
       - "GUID=911"
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.prowlarr.rule=Host(`media.adam-ant.co.uk`) && PathPrefix(`/prowlarr`)"
+        - "traefik.http.routers.prowlarr.middlewares=authelia@file"
+        - "traefik.http.services.prowlarr.loadbalancer.server.port=9696"
 
   sonarr:
     image: spritsail/sonarr
@@ -63,6 +69,12 @@ services:
       - "URL_BASE=/radarr"
       - "SUID=922"
       - "GUID=922"
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.radarr.rule=Host(`media.adam-ant.co.uk`) && PathPrefix(`/radarr`)"
+        - "traefik.http.routers.radarr.middlewares=authelia@file"
+        - "traefik.http.services.radarr.loadbalancer.server.port=7878"
 
   lidarr:
     image: spritsail/lidarr
@@ -72,6 +84,12 @@ services:
     environment:
       - "SUID=923"
       - "GUID=923"
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.lidarr.rule=Host(`media.adam-ant.co.uk`) && PathPrefix(`/lidarr`)"
+        - "traefik.http.routers.lidarr.middlewares=authelia@file"
+        - "traefik.http.services.lidarr.loadbalancer.server.port=8686"
 
   tautulli:
     image: spritsail/tautulli
@@ -80,6 +98,12 @@ services:
     environment:
       - "SUID=951"
       - "GUID=951"
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.tautulli.rule=Host(`media.adam-ant.co.uk`) && PathPrefix(`/tautulli`)"
+        - "traefik.http.routers.tautulli.middlewares=authelia@file"
+        - "traefik.http.services.tautulli.loadbalancer.server.port=8181"
 
 #    plex:
 #      image: spritsail/plex-media-server:plexpass
