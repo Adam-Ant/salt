@@ -1,6 +1,6 @@
 include:
 - swarm
-- nginx-swarm
+- traefik.network
 
 {% set uidPairs = {
   'organizr': '971',
