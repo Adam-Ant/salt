@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  app:
+    image: authelia/authelia:latest
+    volumes:
+      - /volumes/authelia:/config
+    deploy:
+      restart_policy:
+        delay: 10s
+        window: 10s
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.authelia.rule=Host(`auth.adam-ant.co.uk`)"
+        - "traefik.http.services.authelia.loadbalancer.server.port=9091"
+
+networks:
+  default:
+    name: network_public
+    external: true

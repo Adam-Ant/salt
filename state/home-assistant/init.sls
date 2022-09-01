@@ -1,5 +1,6 @@
 include:
 - swarm
+- traefik.network
 
 home-assistant-directories:
   file.directory:

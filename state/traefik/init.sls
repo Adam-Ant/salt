@@ -1,10 +1,11 @@
 include:
   - swarm
+  - .network
 
-nginx_swarm_host_files:
+traefik_config_files:
   file.recurse:
-    - name: /volumes/nginx/conf
-    - source: salt://{{ slspath }}/configs/
+    - name: /volumes/traefik/config
+    - source: salt://{{ slspath }}/config/
     - makedirs: true
     - user: root
     - group: root
@@ -12,20 +13,9 @@ nginx_swarm_host_files:
     - file_mode: 644
     - clean: false
 
-nginx_swarm_generic_includes:
+traefik_certs:
   file.recurse:
-    - name: /volumes/nginx/conf
-    - source: salt://nginx/configs/include/
-    - makedirs: true
-    - user: root
-    - group: root
-    - dir_mode: 755
-    - file_mode: 644
-    - clean: false
-
-nginx_swarm_certs:
-  file.recurse:
-    - name: /volumes/nginx/certs
+    - name: /volumes/traefik/certs
     - source: salt://nginx/certs/
     - makedirs: true
     - user: root
@@ -35,7 +25,7 @@ nginx_swarm_certs:
     - clean: false
     - show_changes: false
 
-/volumes/swarm-files/nginx.yaml:
+/volumes/swarm-files/traefik.yaml:
   file.managed:
     - source: salt://{{ slspath }}/docker-swarm.yaml
     - makedirs: true

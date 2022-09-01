@@ -8,8 +8,13 @@ services:
       - /volumes/media/organizr:/config
     environment:
       - "branch=v2-master"
-    networks:
-      - nginx_frontend
+      - "PUID=971"
+      - "PGID=971"
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.organizr.rule=Host(`media.adam-ant.co.uk`)"
+        - "traefik.http.services.organizr.loadbalancer.server.port=80"
 
   nzbget:
     image: spritsail/nzbget
@@ -19,8 +24,12 @@ services:
     environment:
       - "SUID=901"
       - "GUID=901"
-    networks:
-      - nginx_frontend
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.nzbget.rule=Host(`media.adam-ant.co.uk`) && PathPrefix(`/nzbget`)"
+        - "traefik.http.routers.nzbget.middlewares=authelia@file"
+        - "traefik.http.services.nzbget.loadbalancer.server.port=6789"
 
   prowlarr:
     image: spritsail/prowlarr
@@ -29,8 +38,12 @@ services:
     environment:
       - "SUID=911"
       - "GUID=911"
-    networks:
-      - nginx_frontend
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.prowlarr.rule=Host(`media.adam-ant.co.uk`) && PathPrefix(`/prowlarr`)"
+        - "traefik.http.routers.prowlarr.middlewares=authelia@file"
+        - "traefik.http.services.prowlarr.loadbalancer.server.port=9696"
 
   sonarr:
     image: spritsail/sonarr
@@ -40,8 +53,12 @@ services:
     environment:
       - "SUID=921"
       - "GUID=921"
-    networks:
-      - nginx_frontend
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.sonarr.rule=Host(`media.adam-ant.co.uk`) && PathPrefix(`/sonarr`)"
+        - "traefik.http.routers.sonarr.middlewares=authelia@file"
+        - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
 
   radarr:
     image: spritsail/radarr
@@ -52,8 +69,12 @@ services:
       - "URL_BASE=/radarr"
       - "SUID=922"
       - "GUID=922"
-    networks:
-      - nginx_frontend
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.radarr.rule=Host(`media.adam-ant.co.uk`) && PathPrefix(`/radarr`)"
+        - "traefik.http.routers.radarr.middlewares=authelia@file"
+        - "traefik.http.services.radarr.loadbalancer.server.port=7878"
 
   lidarr:
     image: spritsail/lidarr
@@ -63,8 +84,12 @@ services:
     environment:
       - "SUID=923"
       - "GUID=923"
-    networks:
-      - nginx_frontend
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.lidarr.rule=Host(`media.adam-ant.co.uk`) && PathPrefix(`/lidarr`)"
+        - "traefik.http.routers.lidarr.middlewares=authelia@file"
+        - "traefik.http.services.lidarr.loadbalancer.server.port=8686"
 
   tautulli:
     image: spritsail/tautulli
@@ -73,8 +98,12 @@ services:
     environment:
       - "SUID=951"
       - "GUID=951"
-    networks:
-      - nginx_frontend
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.tautulli.rule=Host(`media.adam-ant.co.uk`) && PathPrefix(`/tautulli`)"
+        - "traefik.http.routers.tautulli.middlewares=authelia@file"
+        - "traefik.http.services.tautulli.loadbalancer.server.port=8181"
 
 #    plex:
 #      image: spritsail/plex-media-server:plexpass
@@ -90,8 +119,6 @@ services:
 #        - "32410:32410/udp"
 #        - "32412-32414:32412-32414/udp"
 #        - "32469:32469"
-#      networks:
-#        - nginx_frontend
 #
 #    jellyfin:
 #      image: jellyfin/jellyfin:latest
@@ -102,9 +129,8 @@ services:
 #      ports:
 #        - "1900:1900"
 #        - "7359:7359/udp"
-#      networks:
-#        - nginx_frontend
 
 networks:
-  nginx_frontend:
+  default:
+    name: network_public
     external: true

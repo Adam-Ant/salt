@@ -1,0 +1,5 @@
+tls:
+  certificates:
+    # first certificate
+    - certFile: /certs/adam-ant.co.uk/fullchain.pem
+      keyFile: /certs/adam-ant.co.uk/privkey.pem

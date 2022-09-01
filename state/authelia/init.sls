@@ -2,14 +2,18 @@ include:
 - swarm
 - traefik.network
 
-/volumes/bitwarden:
-  file.directory:
+/volumes/authelia/configuration.yml:
+  file.managed:
+    - source: salt://{{ slspath }}/configuration.yaml.jinja
+    - template: jinja
+    - context: {{ pillar.authelia | json }}
     - makedirs: true
+    - mode: 0600
+    - dirmode: 0700
     - user: root
     - group: root
-    - mode: 0700
 
-/volumes/swarm-files/bitwarden.yaml:
+/volumes/swarm-files/authelia.yaml:
   file.managed:
     - source: salt://{{ slspath }}/docker-swarm.yaml
     - makedirs: true

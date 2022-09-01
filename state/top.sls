@@ -20,7 +20,8 @@
   'DockerSwarm':
     - swarm
     - home-assistant
-    - nginx-swarm
     - bitwarden
     - beets
     - media
+    - traefik
+    - authelia
