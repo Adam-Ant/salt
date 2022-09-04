@@ -25,3 +25,4 @@
     - media
     - traefik
     - authelia
+    - wireguard

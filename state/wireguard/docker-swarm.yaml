@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  wg:
+    image: weejewel/wg-easy:latest
+    volumes:
+      - /volumes/wireguard:/etc/wireguard
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    sysctls:
+      net.ipv4.conf.all.src_valid_mark: 1
+      net.ipv4.ip_forward: 1
+    ports:
+      - target: 51820
+        published: 51820
+        protocol: udp
+        mode: host
+    networks:
+      - host
+      - traefik
+
+    deploy:
+      placement:
+        preferences: [node.role == manager]
+      restart_policy:
+        delay: 10s
+        window: 10s
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.wireguard.rule=Host(`wg.adam-ant.co.uk`)"
+        - "traefik.http.routers.wireguard.middlewares=authelia@file"
+        - "traefik.http.services.wireguard.loadbalancer.server.port=51821"
+    environment:
+      WG_HOST: "wg.adam-ant.co.uk"
+
+networks:
+  host:
+    external: true
+    name: bridge
+  traefik:
+    name: network_public
+    external: true
