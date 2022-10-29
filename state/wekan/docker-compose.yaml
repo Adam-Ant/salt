@@ -16,7 +16,7 @@ services:
   wekandb:
     command: mongod --oplogSize 128
     container_name: wekandb
-    image: mongo:latest
+    image: mongo:4
     networks:
       - wekan
     restart: on-failure:10
