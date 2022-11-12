@@ -108,11 +108,26 @@ spritsail/fivem:
     FIVEM_VER:
       url: https://api.spritsail.io/fivem/release.php
       structure: latest.slug
-      human_name: fivem-hash
+      human_name: FiveM Hash
     FIVEM_NUM:
       url: https://api.spritsail.io/fivem/release.php
       structure: latest.version
-      human_name: fivem-hash
+      human_name: FiveM Ver
+
+spritsail/fivem@stable:
+  args:
+    DATA_VER:
+      url: https://api.github.com/repos/citizenfx/cfx-server-data/commits
+      structure: 0.sha
+      human_name: CFX-Data
+    FIVEM_VER:
+      url: https://api.spritsail.io/fivem/release.php
+      structure: optional.slug
+      human_name: FiveM Hash
+    FIVEM_NUM:
+      url: https://api.spritsail.io/fivem/release.php
+      structure: optional.version
+      human_name: FiveM Ver
 
 spritsail/plex-media-server:
   args:
