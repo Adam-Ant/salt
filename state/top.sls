@@ -24,5 +24,5 @@
     - beets
     - media
     - traefik
-    - authelia
+    - authentik
     - wireguard

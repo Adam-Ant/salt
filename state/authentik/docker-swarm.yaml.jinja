@@ -1,0 +1,87 @@
+version: '3.9'
+
+services:
+  postgresql:
+    image: postgres:12-alpine
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 5s
+    volumes:
+      - /volumes/authentik/postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: {{ postgres_password }}
+      POSTGRES_USER: authentik
+      POSTGRES_DB: authentik
+
+  redis:
+    image: redis:alpine
+    command: --save 60 1 --loglevel warning
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 3s
+    volumes:
+      - /volumes/authentik/redis:/data
+
+  server:
+    image: ghcr.io/goauthentik/server
+    command: server
+    environment:
+      AUTHENTIK_REDIS__HOST: redis
+      AUTHENTIK_POSTGRESQL__HOST: postgresql
+      AUTHENTIK_POSTGRESQL__USER: authentik
+      AUTHENTIK_POSTGRESQL__NAME: authentik
+      AUTHENTIK_COOKIE_DOMAIN: adam-ant.co.uk
+      AUTHENTIK_SECRET_KEY: {{ secret_key }}
+      AUTHENTIK_POSTGRESQL__PASSWORD: {{ postgres_password }}
+      AUTHENTIK_EMAIL__HOST: {{ smtp.host }}
+      AUTHENTIK_EMAIL__PORT: {{ smtp.port }}
+      AUTHENTIK_EMAIL__USERNAME: {{ smtp.user }}
+      AUTHENTIK_EMAIL__PASSWORD: {{ smtp.pass }}
+      AUTHENTIK_EMAIL__USE_TLS: "true"
+      AUTHENTIK_EMAIL__FROM: {{ smtp.from }}
+    networks:
+      - default
+      - traefik
+    volumes:
+      - /volumes/authentik/media:/media
+      - /volumes/authentik/custom-templates:/templates
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.authentik.rule=Host(`authentik.adam-ant.co.uk`)"
+        - "traefik.http.services.authentik.loadbalancer.server.port=9000"
+        - "traefik.http.routers.authentik-outpost.rule=HostRegexp(`{subdomain:[a-z0-9-]+}.adam-ant.co.uk`) && PathPrefix(`/outpost.goauthentik.io/`)"
+
+
+  worker:
+    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2022.10.1}
+    command: worker
+    environment:
+      AUTHENTIK_REDIS__HOST: redis
+      AUTHENTIK_POSTGRESQL__HOST: postgresql
+      AUTHENTIK_POSTGRESQL__USER: authentik
+      AUTHENTIK_POSTGRESQL__NAME: authentik
+      AUTHENTIK_COOKIE_DOMAIN: adam-ant.co.uk
+      AUTHENTIK_SECRET_KEY: {{ secret_key }}
+      AUTHENTIK_POSTGRESQL__PASSWORD: {{ postgres_password }}
+      AUTHENTIK_EMAIL__HOST: {{ smtp.host }}
+      AUTHENTIK_EMAIL__PORT: {{ smtp.port }}
+      AUTHENTIK_EMAIL__USERNAME: {{ smtp.user }}
+      AUTHENTIK_EMAIL__PASSWORD: {{ smtp.pass }}
+      AUTHENTIK_EMAIL__USE_TLS: "true"
+      AUTHENTIK_EMAIL__FROM: {{ smtp.from }}
+    volumes:
+      - /volumes/authentik/media:/media
+      - /volumes/authentik/certs:/certs
+      - /volumes/authentik/custom-templates:/templates
+
+networks:
+  traefik:
+    name: network_public
+    external: true
