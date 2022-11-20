@@ -29,7 +29,7 @@ services:
       labels:
         - "traefik.enable=true"
         - "traefik.http.routers.wireguard.rule=Host(`wg.adam-ant.co.uk`)"
-        - "traefik.http.routers.wireguard.middlewares=authelia@file"
+        - "traefik.http.routers.wireguard.middlewares=authentik@file"
         - "traefik.http.services.wireguard.loadbalancer.server.port=51821"
     environment:
       WG_HOST: "wg.adam-ant.co.uk"
