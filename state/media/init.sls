@@ -19,9 +19,6 @@ include:
     - makedirs: true
     - user: {{ uid }}
     - group: {{ uid }}
-    - recurse:
-      - user
-      - group
 {% endfor %}
 
 /volumes/swarm-files/media.yaml:
