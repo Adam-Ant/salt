@@ -1,0 +1,54 @@
+version: "3.9"
+services:
+  broker:
+    image: redis:7
+    volumes:
+      - /volumes/paperless/redis:/data
+
+  webserver:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    environment:
+      PAPERLESS_REDIS: redis://broker:6379
+      PAPERLESS_TIKA_ENABLED: 1
+      PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
+      PAPERLESS_TIKA_ENDPOINT: http://tika:9998
+      PAPERLESS_URL: https://paperless.adam-ant.co.uk
+      PAPERLESS_TIME_ZONE: Europe/London
+      PAPERLESS_OCR_LANGUAGE: eng
+      PAPERLESS_SECRET_KEY: {{ secret_key }}
+      PAPERLESS_ENABLE_HTTP_REMOTE_USER: "true"
+      PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME: HTTP_X_AUTHENTIK_USERNAME
+    healthcheck:
+      test: ["CMD", "curl", "-fs", "-S", "--max-time", "2", "http://localhost:8000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - default
+      - traefik
+    volumes:
+      - /volumes/paperless/data:/usr/src/paperless/data
+      - /volumes/paperless/media:/usr/src/paperless/media
+      - /volumes/paperless/export:/usr/src/paperless/export
+      - /volumes/paperless/consume:/usr/src/paperless/consume
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.paperless.rule=Host(`paperless.adam-ant.co.uk`)"
+        - "traefik.http.routers.paperless.middlewares=authentik@file"
+        - "traefik.http.services.paperless.loadbalancer.server.port=8000"
+
+  gotenberg:
+    image: gotenberg/gotenberg:7.4
+    command:
+      - "gotenberg"
+      - "--chromium-disable-routes=true"
+
+  tika:
+    image: ghcr.io/paperless-ngx/tika:latest
+
+networks:
+  traefik:
+    name: network_public
+    external: true
+

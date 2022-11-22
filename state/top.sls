@@ -26,3 +26,4 @@
     - traefik
     - authentik
     - wireguard
+    - paperless
