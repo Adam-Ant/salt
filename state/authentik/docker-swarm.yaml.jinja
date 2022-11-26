@@ -60,7 +60,7 @@ services:
 
 
   worker:
-    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2022.10.1}
+    image: ghcr.io/goauthentik/server
     command: worker
     environment:
       AUTHENTIK_REDIS__HOST: redis
