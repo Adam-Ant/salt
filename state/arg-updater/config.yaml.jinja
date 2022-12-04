@@ -59,30 +59,12 @@ spritsail/nzbget@testing:
       human_name: NZBGet
       strip_front: v
 
-spritsail/lidarr:
-  args:
-    LIDARR_VER:
-      url: https://api.github.com/repos/lidarr/lidarr/releases
-      structure: 0.tag_name
-      human_name: Lidarr
-      strip_front: v
-
-
-spritsail/radarr:
-  args:
-    RADARR_VER:
-      url: https://api.github.com/repos/radarr/radarr/releases
-      structure: 0.tag_name
-      human_name: Radarr
-      strip_front: v
-
 spritsail/sonarr:
   args:
     SONARR_VER:
-      url: https://api.github.com/repos/Sonarr/Sonarr/tags
-      structure: 0.name
+      url: https://services.sonarr.tv/v1/update/master?version=3&os=linux-musl
+      structure: updatePackage.version
       human_name: Sonarr
-      strip_front: v
 
 spritsail/sonarr@beta:
   args:
@@ -90,6 +72,27 @@ spritsail/sonarr@beta:
       url: https://services.sonarr.tv/v1/update/develop?version=4&os=linux-musl
       structure: updatePackage.version
       human_name: Sonarr
+
+spritsail/radarr:
+  args:
+    RADARR_VER:
+      url: https://radarr.servarr.com/v1/update/master?version=4.0&os=linux&runtime=netcore&arch=x64
+      structure: updatePackage.version
+      human_name: Radarr
+
+spritsail/radarr@develop:
+  args:
+    RADARR_VER:
+      url: https://radarr.servarr.com/v1/update/develop?version=4.0&os=linux&runtime=netcore&arch=x64
+      structure: updatePackage.version
+      human_name: Radarr
+
+spritsail/lidarr:
+  args:
+    LIDARR_VER:
+      url: https://lidarr.servarr.com/v1/update/develop?version=1.0&os=linux&runtime=netcore&arch=x64
+      structure: updatePackage.version
+      human_name: Lidarr
 
 spritsail/tautulli:
   args:
