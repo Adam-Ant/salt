@@ -90,9 +90,10 @@ spritsail/radarr@develop:
 spritsail/lidarr:
   args:
     LIDARR_VER:
-      url: https://lidarr.servarr.com/v1/update/develop?version=1.0&os=linux&runtime=netcore&arch=x64
-      structure: updatePackage.version
+      url: https://api.github.com/repos/lidarr/lidarr/releases
+      structure: 0.tag_name
       human_name: Lidarr
+      strip_front: v
 
 spritsail/tautulli:
   args:
