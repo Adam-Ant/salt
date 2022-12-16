@@ -17,6 +17,8 @@
     - minecraft-archive
   'PiCluster-*':
     - swarm
+  'Cluster-*':
+    - swarm
   'DockerSwarm':
     - swarm
     - home-assistant
