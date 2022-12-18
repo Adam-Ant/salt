@@ -9,7 +9,19 @@
     {%- if user.password is defined %}
     - password: {{ user.password | json }}
     {%- endif %}
-  ssh_auth.manage:
+
+/home/{{ name }}/.ssh:
+  file.directory:
     - user: {{ name }}
-    - ssh_keys: {{ user.get('ssh_keys', [])|json }}
+    - mode: "700"
+    - require:
+      - user: {{ name }}
+
+/home/{{ name }}/.ssh/authorized_keys:
+  file.managed:
+    - user: {{ name }}
+    - mode: "600"
+    - contents: {{ user.get('ssh_keys', []) | join("\n") | yaml_encode }}
+    - require:
+      - file: /home/{{ name }}/.ssh
 {%- endfor %}
