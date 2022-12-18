@@ -10,7 +10,7 @@ include:
   file.managed:
     - source: salt://{{ slspath }}/docker-compose.yaml.jinja
     - template: jinja
-    - context: {{ pillar.drone | json }}
+    - context: {{ pillar.registry | json }}
     - makedirs: true
     - mode: 644
     - dirmode: 755

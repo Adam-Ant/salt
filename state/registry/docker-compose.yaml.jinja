@@ -15,6 +15,9 @@ services:
       - REGISTRY_AUTH_HTPASSWD_REALM=basic-realm
         # Keeps frebib happy
       - REGISTRY_PROMETHEUS_ENABLED=true
+      - REGISTRY_PROXY_REMOTEURL=https://registry-1.docker.io
+      - REGISTRY_PROXY_USERNAME={{ dockerhub_username }}
+      - REGISTRY_PROXY_PASSWORD={{ dockerhub_password }}
     networks:
       - nginx_proxy
     restart: unless-stopped
