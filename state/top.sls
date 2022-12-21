@@ -29,3 +29,5 @@
     - authentik
     - wireguard
     - paperless
+  'oracledronerunner':
+    - drone-runner

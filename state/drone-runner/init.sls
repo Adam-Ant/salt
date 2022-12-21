@@ -1,9 +1,9 @@
 include:
-  - swarm
+  - docker
 
-/volumes/swarm-files/drone-runner.yaml:
+/etc/docker-compose/drone-runner/docker-compose.yaml:
   file.managed:
-    - source: salt://{{ slspath }}/docker-swarm.yaml.jinja
+    - source: salt://{{ slspath }}/docker-compose.yaml.jinja
     - template: jinja
     - context:
         drone_rpc_secret: {{ pillar.drone.rpc_secret | yaml }}
@@ -13,3 +13,10 @@ include:
     - dirmode: 755
     - user: root
     - group: root
+
+  dockercompose.up:
+    - pull: true
+    - require:
+      - file: /etc/docker-compose/drone-runner/docker-compose.yaml
+      - sls: docker
+

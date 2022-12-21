@@ -5,28 +5,15 @@ services:
     image: drone/drone-runner-docker
     volumes:
       - /run/docker.sock:/var/run/docker.sock:rw
-    deploy:
-      replicas: 2
-      placement:
-        constraints:
-          - node.platform.arch == aarch64
-      update_config:
-        parallelism: 1
-        delay: 20s
-        order: start-first
-      restart_policy:
-        delay: 10s
-        window: 10s
     environment:
       - DRONE_RPC_HOST=drone.spritsail.io
       - DRONE_RPC_PROTO=https
       - DRONE_RPC_SECRET={{ drone_rpc_secret }}
-
-      - DRONE_RUNNER_CAPACITY=1
+      - DRONE_RUNNER_NAME={{ hostname }}
+      - DRONE_RUNNER_CAPACITY=3
       - DRONE_RUNNER_VOLUMES=/var/run/docker.sock:/var/run/docker.sock
       - DRONE_RUNNER_OS=linux
       - DRONE_RUNNER_ARCH=arm64
       - DRONE_RUNNER_PLATFORM=linux/arm64
-
       - DRONE_DEBUG=true
       #- DRONE_TRACE=true
