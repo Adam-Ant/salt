@@ -1,6 +1,7 @@
 {{ saltenv }}:
   '*':
     - users
+    - base-pkgs
   'web.spritsail.io':
     - watchtower
     - gitea
