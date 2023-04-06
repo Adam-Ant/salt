@@ -39,6 +39,11 @@ services:
       POSTGRES_HOSTNAME: postgres
       POSTGRES_PASSWORD: {{ postgres_pw }}
       POSTGRES_USER: guacamole
+      OPENID_AUTHORIZATION_ENDPOINT: https://authentik.adam-ant.co.uk/application/o/authorize/
+      OPENID_CLIENT_ID: {{openid_client }}
+      OPENID_ISSUER: https://authentik.adam-ant.co.uk/application/o/guacamole/
+      OPENID_JWKS_ENDPOINT: https://authentik.adam-ant.co.uk/application/o/guacamole/jwks/
+      OPENID_REDIRECT_URI: https://guac.adam-ant.co.uk/guacamole
     networks:
       - default
       - external
