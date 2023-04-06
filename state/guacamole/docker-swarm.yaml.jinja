@@ -8,7 +8,7 @@ services:
         delay: 10s
         window: 10s
     environment:
-      PGDATA: /var/lib/postgresql/data/guacamole
+      PGDATA: /var/lib/postgresql/data
       POSTGRES_DB: guacamole_db
       POSTGRES_PASSWORD: {{ postgres_pw }}
       POSTGRES_USER: guacamole

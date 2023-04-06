@@ -5,8 +5,8 @@ include:
 /volumes/guacamole:
   file.directory:
     - makedirs: true
-    - user: root
-    - group: root
+    - user: 70
+    - group: 70
     - mode: 0700
 
 /volumes/swarm-files/guacamole.yaml:
