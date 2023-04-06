@@ -30,5 +30,6 @@
     - authentik
     - wireguard
     - paperless
+    - guacamole
   'oracledronerunner':
     - drone-runner

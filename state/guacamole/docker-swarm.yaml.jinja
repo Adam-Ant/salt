@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:alpine
+    deploy:
+      restart_policy:
+        delay: 10s
+        window: 10s
+    environment:
+      PGDATA: /var/lib/postgresql/data/guacamole
+      POSTGRES_DB: guacamole_db
+      POSTGRES_PASSWORD: {{ postgres_pw }}
+      POSTGRES_USER: guacamole
+    volumes:
+      - /volumes/guacamole:/var/lib/postgresql/data
+
+  backend:
+    image: guacamole/guacd
+    deploy:
+      restart_policy:
+        delay: 10s
+        window: 10s
+
+  frontend:
+    image: guacamole/guacamole
+    deploy:
+      restart_policy:
+        delay: 10s
+        window: 10s
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.guacamole.rule=Host(`guac.adam-ant.co.uk`)"
+        # - "traefik.http.routers.guacamole.middlewares=authentik@file"
+        - "traefik.http.services.guacamole.loadbalancer.server.port=80"
+    environment:
+      GUACD_HOSTNAME: guacd
+      POSTGRES_DATABASE: guacamole_db
+      POSTGRES_HOSTNAME: postgres
+      POSTGRES_PASSWORD: {{ postgres_pw }}
+      POSTGRES_USER: guacamole
+    networks:
+      - default
+      - external
+
+
+networks:
+  external:
+    name: network_public
+    external: true
