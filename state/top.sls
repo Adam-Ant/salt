@@ -33,3 +33,5 @@
     - guacamole
   'oracledronerunner':
     - drone-runner
+  'ceph.lan':
+    - ceph

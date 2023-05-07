@@ -3,6 +3,7 @@
     - users
     - docker
     - secret
+    - ceph
 
   'PiCluster-*':
     - swarm
