@@ -13,3 +13,20 @@ cephadm:
   pkg.latest:
     - refresh: True
 
+cephsvc:
+  user.present:
+    - shell: /bin/sh
+    - home: /home/cephsvc
+    - usergroup: true
+    - createhome: true
+    - system: true
+
+/etc/sudoers.d/cephsvc:
+  file.managed:
+    - user: root
+    - group: root
+    - mode: 440
+    - contents: |
+        cephsvc  ALL=(ALL)  NOPASSWD:ALL
+
+
