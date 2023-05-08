@@ -1,0 +1,10 @@
+version: '3.9'
+
+services:
+  tomscott:
+    image: adamant/tgvideobot
+    environment:
+      CLIPS: {{ tomscott.num_clips }}
+      BASE_URL: {{ tomscott.base_url }}
+      TITLE: Get a random Tom Scott excuse
+      TOKEN: {{ tomscott.telegram_token }}

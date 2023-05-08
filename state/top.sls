@@ -32,6 +32,7 @@
     - wireguard
     - paperless
     - guacamole
+    - tgvideobot
   'oracledronerunner':
     - drone-runner
   'ceph.lan':
