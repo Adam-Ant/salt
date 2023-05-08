@@ -1,7 +1,7 @@
 include:
   - docker
 
-ceph_repo:
+ceph repo:
   pkgrepo.managed:
     - name: deb https://download.ceph.com/{{ grains.os|lower }}-{{ salt.pillar.get("ceph:version", "quincy") }} {{ salt.pillar.get("ceph:debian_ver", grains.oscodename | lower) }} main
     - file: /etc/apt/sources.list.d/ceph.list
@@ -9,7 +9,7 @@ ceph_repo:
     - architectures: {{ grains.osarch }}
     - refresh: true
 
-cephadm:
+ceph core packages:
   pkg.latest:
     - pkgs:
       - cephadm
@@ -25,11 +25,12 @@ cephsvc:
     - createhome: true
     - system: true
 
-cephssh:
+cephsvc ssh key:
   ssh_auth.present:
     - user: cephsvc
     - enc: ssh-rsa
     - name: {{ pillar.ceph.pubkey }}
+
 /etc/sudoers.d/cephsvc:
   file.managed:
     - user: root
@@ -38,4 +39,29 @@ cephssh:
     - contents: |
         cephsvc  ALL=(ALL)  NOPASSWD:ALL
 
+/etc/ceph/ceph.conf:
+  file.managed:
+    - source: salt://{{ slspath }}/ceph.conf
+    - makedirs: true
+    - mode: 440
+    - dirmode: 755
+    - user: root
+    - group: root
 
+/etc/ceph/ceph.client.admin.keyring:
+  file.managed:
+    - source: salt://{{ slspath }}/admin.keyring
+    - makedirs: true
+    - mode: 400
+    - dirmode: 755
+    - user: root
+    - group: root
+
+/volumes:
+  mount.mounted:
+    - device: admin@.swarm_persist=/
+    - fstype: ceph
+    - mkmnt: True
+    - persist: True
+    - mount: True
+    - ops: rw
