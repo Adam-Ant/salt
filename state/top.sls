@@ -20,6 +20,7 @@
     - swarm
   'Cluster-*':
     - swarm
+    - ceph
   'DockerSwarm':
     - swarm
     - home-assistant
