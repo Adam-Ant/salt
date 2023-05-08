@@ -16,14 +16,14 @@ services:
       - /volumes/guacamole:/var/lib/postgresql/data
 
   backend:
-    image: guacamole/guacd
+    image: guacamole/guacd:{{ version }}
     deploy:
       restart_policy:
         delay: 10s
         window: 10s
 
   frontend:
-    image: guacamole/guacamole
+    image: guacamole/guacamole:{{ version }}
     deploy:
       restart_policy:
         delay: 10s

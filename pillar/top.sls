@@ -4,6 +4,7 @@
     - docker
     - secret
     - ceph
+    - guacamole
 
   'PiCluster-*':
     - swarm
