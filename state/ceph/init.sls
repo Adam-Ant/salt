@@ -11,7 +11,11 @@ ceph_repo:
 
 cephadm:
   pkg.latest:
+    - pkgs:
+      - cephadm
+      - ceph-common
     - refresh: True
+    - install_recommends: False
 
 cephsvc:
   user.present:
@@ -21,6 +25,11 @@ cephsvc:
     - createhome: true
     - system: true
 
+cephssh:
+  ssh_auth.present:
+    - user: cephsvc
+    - enc: ssh-rsa
+    - name: {{ pillar.ceph.pubkey }}
 /etc/sudoers.d/cephsvc:
   file.managed:
     - user: root
