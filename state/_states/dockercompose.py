@@ -4,7 +4,6 @@ import re
 import sys
 
 import docker
-import salt.ext.six
 
 try:
     import compose.cli.command
@@ -22,7 +21,7 @@ log = logging.getLogger(__name__)
 
 def __virtual__():
     if HAS_DOCKERCOMPOSE:
-        match = re.match(VERSION_RE, salt.ext.six.text_type(compose.__version__))
+        match = re.match(VERSION_RE, compose.__version__)
         if match:
             version = tuple(int(x) for x in match.group(1).split("."))
             if version >= MIN_DOCKERCOMPOSE:
@@ -58,7 +57,7 @@ def up(name, **kwargs):  # pylint: disable=invalid-name
 
     # Attempt to pull the images first
     if pull and not test:
-        log.info(f"Pulling docker images for {project.name}")
+        log.info("Pulling docker images for %s", project.name)
         try:
             project.parallel_pull(services, ignore_pull_failures=False, silent=True)
         except compose.project.ProjectError as pe:
@@ -74,7 +73,7 @@ def up(name, **kwargs):  # pylint: disable=invalid-name
 
     for cont in plans:
         (action, _) = plans[cont]
-        log.debug(f"docker-compose action for {cont} is {action}")
+        log.debug("docker-compose action for %s is %s", cont, action)
         if action != "noop":
             if action == "create":
                 ret["changes"][cont] = "Creating container"
@@ -89,7 +88,7 @@ def up(name, **kwargs):  # pylint: disable=invalid-name
         return ret
 
     try:
-        up = project.up(
+        project.up(
             service_names,
             silent=True,
             always_recreate_deps=recreate,
