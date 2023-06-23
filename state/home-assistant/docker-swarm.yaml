@@ -44,6 +44,15 @@ services:
         delay: 10s
         window: 10s
 
+  piper:
+    image: rhasspy/wyoming-piper
+    volumes:
+      - /volumes/ha/piper:/data
+    deploy:
+      restart_policy:
+        delay: 10s
+        window: 10s
+
 networks:
   network_public:
     external: true
