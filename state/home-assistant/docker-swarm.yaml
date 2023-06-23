@@ -46,12 +46,23 @@ services:
 
   piper:
     image: rhasspy/wyoming-piper
-    volumes:
-      - /volumes/ha/piper:/data
+    command: --voice en-gb-southern_english_female-low
     deploy:
       restart_policy:
         delay: 10s
         window: 10s
+    volumes:
+      - /volumes/ha/piper:/data
+
+  whisper:
+    image: rhasspy/wyoming-whisper
+    command: --language en --model small-int8
+    deploy:
+      restart_policy:
+        delay: 10s
+        window: 10s
+    volumes:
+      - /volumes/ha/whisper:/data
 
 networks:
   network_public:

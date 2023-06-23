@@ -11,6 +11,7 @@ home-assistant-directories:
       - /volumes/ha/hass
       - /volumes/ha/zigbee
       - /volumes/ha/piper
+      - /volumes/ha/whisper
 
 /volumes/swarm-files/ha.yaml:
   file.managed:
