@@ -1,6 +1,7 @@
 include:
   - docker
 
+{% if grains['oscodename'] != 'bookworm' %}
 ceph repo:
   pkgrepo.managed:
     - name: deb https://download.ceph.com/{{ grains.os|lower }}-{{ salt.pillar.get("ceph:version", "quincy") }} {{ salt.pillar.get("ceph:debian_ver", grains.oscodename | lower) }} main
@@ -8,6 +9,7 @@ ceph repo:
     - key_url: https://download.ceph.com/keys/release.gpg
     - architectures: {{ grains.osarch }}
     - refresh: true
+{% endif %}
 
 ceph core packages:
   pkg.latest:
