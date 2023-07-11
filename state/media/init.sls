@@ -9,7 +9,8 @@ include:
   'sonarr':   921,
   'radarr':   922,
   'lidarr':   923,
-  'tautulli': 951
+  'tautulli': 951,
+  'plex': 941
 } %}
 
 

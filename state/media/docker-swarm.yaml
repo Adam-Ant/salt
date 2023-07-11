@@ -105,20 +105,23 @@ services:
         - "traefik.http.routers.tautulli.middlewares=authentik@file"
         - "traefik.http.services.tautulli.loadbalancer.server.port=8181"
 
-#    plex:
-#      image: spritsail/plex-media-server:plexpass
-#      volumes:
-#        - /volumes/media/plex:/config
-#        - /mnt/media:/media
-#      ports:
-#        - "1900:1900/udp"
-#        - "3005:3005"
-#        - "5353:5353/udp"
-#        - "8324:8324"
-#        - "32400:32400"
-#        - "32410:32410/udp"
-#        - "32412-32414:32412-32414/udp"
-#        - "32469:32469"
+   plex:
+     image: spritsail/plex-media-server:plexpass
+     volumes:
+       - /volumes/media/plex:/config
+       - /mnt/media:/media
+    environment:
+      - "SUID=941"
+      - "GUID=941"
+     ports:
+       - "1900:1900/udp"
+       - "3005:3005"
+       - "5353:5353/udp"
+       - "8324:8324"
+       - "32400:32400"
+       - "32410:32410/udp"
+       - "32412-32414:32412-32414/udp"
+       - "32469:32469"
 #
 #    jellyfin:
 #      image: jellyfin/jellyfin:latest
