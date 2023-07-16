@@ -5,18 +5,6 @@
 config:
   access_token: {{ github_token }}
 
-spritsail/nzbhydra:
-  args:
-    NZBHYDRA_VER:
-      url: https://api.github.com/repos/theotherp/nzbhydra2/releases
-      structure: 0.tag_name
-      human_name: NZBHydra
-      strip_front: v
-    YQ_VER:
-      url: https://api.github.com/repos/mikefarah/yq/releases
-      structure: 0.tag_name
-      human_name: YQ
-
 spritsail/iodine:
   args:
     IODINE_VER:
