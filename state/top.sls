@@ -33,6 +33,7 @@
     - paperless
     - guacamole
     - tgvideobot
+    - homepage
   'oracledronerunner':
     - drone-runner
   'ceph.lan':

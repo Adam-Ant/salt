@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  homepage:
+    image: "ghcr.io/benphelps/homepage:latest"
+    volumes:
+      - "/volumes/homepage:/app/config"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    deploy:
+      mode: global
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.homepage.rule=Host(`home.adam-ant.co.uk`)"
+        - "traefik.http.routers.homepage.middlewares=authentik@file"
+        - "traefik.http.services.homepage.loadbalancer.server.port=3000"
+      placement:
+        constraints: [node.role == manager]
+
+networks:
+  default:
+    name: network_public
+    external: true
