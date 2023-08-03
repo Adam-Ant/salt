@@ -37,6 +37,11 @@ services:
         - "traefik.http.routers.paperless.rule=Host(`paperless.adam-ant.co.uk`)"
         - "traefik.http.routers.paperless.middlewares=authentik@file"
         - "traefik.http.services.paperless.loadbalancer.server.port=8000"
+        - "homepage.name=Paperless"
+        - "homepage.group=Info Management"
+        - "homepage.description=Document management & storage solution"
+        - "homepage.icon=mdi-file-document-multiple"
+        - "homepage.href=https://paperless.adam-ant.co.uk"
 
   gotenberg:
     image: gotenberg/gotenberg:7.4

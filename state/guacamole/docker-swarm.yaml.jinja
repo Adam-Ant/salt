@@ -32,6 +32,11 @@ services:
         - "traefik.enable=true"
         - "traefik.http.routers.guacamole.rule=Host(`guac.adam-ant.co.uk`)"
         - "traefik.http.services.guacamole.loadbalancer.server.port=8080"
+        - "homepage.name=Guacamole"
+        - "homepage.group=Infrastructure"
+        - "homepage.description=Web VNC & SSH client"
+        - "homepage.icon=mdi-console"
+        - "homepage.href=https://guac.adam-ant.co.uk"
     environment:
       GUACD_HOSTNAME: backend
       POSTGRES_DATABASE: guacamole_db

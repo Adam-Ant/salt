@@ -32,6 +32,11 @@ services:
         - "traefik.http.routers.wireguard.rule=Host(`wg.adam-ant.co.uk`)"
         - "traefik.http.routers.wireguard.middlewares=authentik@file"
         - "traefik.http.services.wireguard.loadbalancer.server.port=51821"
+        - "homepage.name=Wireguard"
+        - "homepage.group=Infrastructure"
+        - "homepage.description=Lightweight VPN"
+        - "homepage.icon=si-wireguard"
+        - "homepage.href=https://wg.adam-ant.co.uk"
     environment:
       WG_HOST: "wg.adam-ant.co.uk"
 

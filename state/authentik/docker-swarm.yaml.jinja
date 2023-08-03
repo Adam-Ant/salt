@@ -57,6 +57,11 @@ services:
         - "traefik.http.routers.authentik.rule=Host(`authentik.adam-ant.co.uk`)"
         - "traefik.http.services.authentik.loadbalancer.server.port=9000"
         - "traefik.http.routers.authentik-outpost.rule=HostRegexp(`{subdomain:[a-z0-9-]+}.adam-ant.co.uk`) && PathPrefix(`/outpost.goauthentik.io/`)"
+        - "homepage.name=Authentik"
+        - "homepage.group=Infrastructure"
+        - "homepage.description=SSO Provider"
+        - "homepage.icon=si-webauthn"
+        - "homepage.href=https://authentik.adam-ant.co.uk"
 
 
   worker:

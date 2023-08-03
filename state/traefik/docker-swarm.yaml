@@ -23,6 +23,12 @@ services:
       mode: global
       placement:
         constraints: [node.role == manager]
+      labels:
+        - "homepage.name=Traefik"
+        - "homepage.group=Infrastructure"
+        - "homepage.description=Frntend load balancer & reverse proxy"
+        - "homepage.icon=si-traefikproxy"
+        - "homepage.href=http://192.168.1.70:4563"
 
 networks:
   default:
