@@ -51,6 +51,7 @@ nginx:
     - watch:
       - file: nginx_host_files
       - file: nginx_generic_includes
+      - file: nginx_certs
     - require:
       - file: /etc/docker-compose/nginx/docker-compose.yaml
       - sls: docker
