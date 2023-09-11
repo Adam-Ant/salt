@@ -11,12 +11,12 @@ spritsail/iodine:
       url: https://api.github.com/repos/yarrick/iodine/tags
       structure: 0.name
       human_name: Iodine
-      strip_front: v
+      version_regex: v(.+)
     ZLIB_VER:
       url: https://api.github.com/repos/madler/zlib/tags
       structure: 0.name
       human_name: ZLib
-      strip_front: v
+      version_regex: v(.+)
 
 spritsail/beets:
   args:
@@ -24,7 +24,7 @@ spritsail/beets:
       url: https://api.github.com/repos/beetbox/beets/releases
       structure: 0.tag_name
       human_name: Beets
-      strip_front: v
+      version_regex: v(.+)
 
 spritsail/jackett:
   args:
@@ -32,7 +32,7 @@ spritsail/jackett:
       url: https://api.github.com/repos/Jackett/Jackett/releases
       structure: 0.tag_name
       human_name: Jackett
-      strip_front: v
+      version_regex: v(.+)
 
 spritsail/nzbget@testing:
   args:
@@ -40,7 +40,7 @@ spritsail/nzbget@testing:
       url: https://api.github.com/repos/nzbget/nzbget/releases
       structure: 0.tag_name
       human_name: NZBGet
-      strip_front: v
+      version_regex: v(.+)
 
 spritsail/sonarr:
   args:
@@ -61,7 +61,12 @@ spritsail/radarr:
     RADARR_VER:
       url: https://radarr.servarr.com/v1/update/master?version=4.0&os=linux&runtime=netcore&arch=x64
       structure: updatePackage.version
-      human_name: Radarr
+      human_name: Radarr version
+    RADARR_BRANCH:
+      url: https://radarr.servarr.com/v1/update/master?version=4.0&os=linux&runtime=netcore&arch=x64
+      structure: updatePackage.filename
+      version_regex: Radarr\.([^\.]+)\..*
+      human_name: release branch
 
 spritsail/radarr@develop:
   args:
@@ -75,8 +80,13 @@ spritsail/lidarr:
     LIDARR_VER:
       url: https://api.github.com/repos/lidarr/lidarr/releases
       structure: 0.tag_name
-      human_name: Lidarr
-      strip_front: v
+      human_name: Lidarr version
+      version_regex: v(.+)
+    LIDARR_BRANCH:
+      url: https://api.github.com/repos/lidarr/lidarr/releases
+      structure: 0.assets.0.name
+      human_name: release branch
+      version_regex: Lidarr\.([^\.]+)\..*
 
 spritsail/prowlarr:
   args:
@@ -86,8 +96,9 @@ spritsail/prowlarr:
       human_name: Prowlarr
     PROWLARR_BRANCH:
       url: https://prowlarr.servarr.com/v1/update/develop?version=0.0&os=linux&runtime=netcore&arch=x64
-      structure: updatePackage.branch
-      human_name: Branch
+      structure: updatePackage.filename
+      version_regex: Prowlarr\.([^\.]+)\..*
+      human_name: release branch
 
 spritsail/tautulli:
   args:
@@ -95,7 +106,7 @@ spritsail/tautulli:
       url: https://api.github.com/repos/Tautulli/Tautulli/releases
       structure: 0.tag_name
       human_name: Tautulli
-      strip_front: v
+      version_regex: v(.+)
 
 spritsail/fivem:
   args:
