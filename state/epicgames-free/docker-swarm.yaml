@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  epic:
+    image: 'ghcr.io/claabs/epicgames-freegames-node:latest'
+    ports:
+      - '3000:3000'
+    volumes:
+      - '/volumes/epicgames-free:/usr/app/config'
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.epicgamesfree.rule=Host(`epicgames.adam-ant.co.uk`)"
+        - "traefik.http.services.epicgamesfree.loadbalancer.server.port=3000"
+

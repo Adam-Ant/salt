@@ -34,6 +34,7 @@
     - guacamole
     - tgvideobot
     - homepage
+    - epicgames-free
   'oracledronerunner':
     - drone-runner
   'ceph.lan':

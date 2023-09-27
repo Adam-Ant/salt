@@ -1,0 +1,22 @@
+{
+  "runOnStartup": true,
+  "cronSchedule": "0 0,6,12,18 * * *",
+  "logLevel": "info",
+  "webPortalConfig": {
+    "baseUrl": "https://epicgames.adam-ant.co.uk"
+  },
+  "accounts": [
+    {
+      "email": "{{ email }}"
+    }
+  ],
+  "notificationTimeoutHours": 72,
+  "notifiers": [
+    {
+      "type": "telegram",
+      "apiUrl": "https://api.telegram.org",
+      "token": "{{ telegram.token }}",
+      "chatId": "{{ telegram.channel }}"
+    } ]
+}
+
