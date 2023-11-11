@@ -1,0 +1,18 @@
+version: '2.4'
+
+services:
+  homeserver:
+    image: matrixconduit/matrix-conduit:latest
+    user: root
+    volumes:
+      - /volumes/matrix/config.toml:/etc/conduit/config.toml:ro
+      - /volumes/matrix/database:/var/lib/matrix-conduit/
+    networks:
+      - nginx_proxy
+    environment:
+      CONDUIT_CONFIG: /etc/conduit/config.toml
+    restart: unless-stopped
+
+networks:
+  nginx_proxy:
+    external: true

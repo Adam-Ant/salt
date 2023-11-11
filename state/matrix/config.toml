@@ -1,0 +1,22 @@
+[global]
+server_name = "spritsail.io"
+
+# This is the only directory where Conduit will save its data
+database_path = "/var/lib/matrix-conduit/"
+database_backend = "rocksdb"
+
+address = "::"
+port = 6167
+
+# Max size for uploads
+max_request_size = 104857600 # 100MiB; in bytes
+#max_concurrent_requests = 100 # How many requests Conduit sends to other servers at the same time
+
+allow_registration = false
+allow_federation = true
+allow_check_for_updates = true
+
+# Server to get public keys from. You probably shouldn't change this
+trusted_servers = ["nerdhouse.io", "matrix.org"]
+
+log = "info,state_res=warn,rocket=off,_=off,sled=off"
