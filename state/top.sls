@@ -5,7 +5,6 @@
   'web.spritsail.io':
     - watchtower
     - gitea
-    - imageinfo
     - teamspeak3
     - wekan
     - arg-updater
