@@ -1,0 +1,91 @@
+modules:
+  ping:
+    prober: icmp
+    timeout: 10s
+
+  ping4:
+    prober: icmp
+    timeout: 10s
+    icmp:
+      preferred_ip_protocol: ip4
+      ip_protocol_fallback: false
+
+  ping6:
+    prober: icmp
+    timeout: 10s
+    icmp:
+      preferred_ip_protocol: ip6
+      ip_protocol_fallback: false
+
+  http4:
+    prober: http
+    http:
+      method: GET
+      preferred_ip_protocol: ip4
+      ip_protocol_fallback: false
+      headers:
+        User-Agent: prometheus-probes
+
+  https4:
+    prober: http
+    http:
+      method: GET
+      fail_if_not_ssl: true
+      preferred_ip_protocol: ip4
+      ip_protocol_fallback: false
+      headers:
+        User-Agent: prometheus-probes
+
+  https6:
+    prober: http
+    http:
+      method: GET
+      fail_if_not_ssl: true
+      preferred_ip_protocol: ip6
+      ip_protocol_fallback: false
+      headers:
+        User-Agent: prometheus-probes
+
+  ssh4:
+    prober: tcp
+    tcp:
+      preferred_ip_protocol: ip4
+      ip_protocol_fallback: false
+      query_response:
+        - expect: "^SSH-2.0-"
+        - send: "SSH-2.0-blackbox-ssh-check"
+
+  ssh6:
+    prober: tcp
+    tcp:
+      preferred_ip_protocol: ip6
+      ip_protocol_fallback: false
+      query_response:
+        - expect: "^SSH-2.0-"
+        - send: "SSH-2.0-blackbox-ssh-check"
+
+  dns_udp_A_nerdhouseio:
+    prober: dns
+    dns:
+      query_name: nerdhouse.io
+      query_type: AAAA
+      transport_protocol: udp
+
+  dns_udp_AAAA_nerdhouseio:
+    prober: dns
+    dns:
+      query_name: nerdhouse.io
+      query_type: AAAA
+      transport_protocol: udp
+
+  docker:
+    prober: http
+    http:
+      method: HEAD
+      valid_status_codes:
+        - 200
+        - 301
+        - 401
+      fail_if_not_ssl: true
+      headers:
+        User-Agent: docker-probe

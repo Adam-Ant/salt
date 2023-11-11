@@ -12,6 +12,7 @@
     - velocity
     - registry
     - matrix
+    - metrics
   'DockerGames.lan':
     - watchtower
     - minecraft-creative
