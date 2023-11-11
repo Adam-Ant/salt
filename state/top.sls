@@ -11,6 +11,7 @@
     - drone
     - velocity
     - registry
+    - matrix
   'DockerGames.lan':
     - watchtower
     - minecraft-creative
