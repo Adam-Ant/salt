@@ -9,6 +9,7 @@ docker_repo:
 docker-deps:
   pkg.latest:
     - pkgs:
+      - gnupg
       - ca-certificates
       - docker-ce-cli
       - python3-pip
