@@ -1,0 +1,86 @@
+version: "2.4"
+
+services:
+  certificates:
+    container_name: metrics-certificates
+    image: smallstep/step-cli
+    command:
+      - step
+      - ca
+      - renew
+      - --daemon
+      - --force
+      - /step/web.spritsail.io.crt
+      - /step/web.spritsail.io.key
+    user: 65534:65534  # nobody:nogroup
+    working_dir: /step
+    environment:
+      - STEPPATH=/step
+    volumes:
+      - /volumes/metrics/pki:/step
+    network_mode: bridge
+    restart: unless-stopped
+
+  node-exporter:
+    container_name: node-exporter
+    image: prom/node-exporter
+    user: root
+    command:
+      - --web.config.file=/pki/exporter-tls.yml
+      - --path.rootfs=/host
+      - --collector.systemd
+    volumes:
+      - /volumes/metrics/pki:/pki:ro
+      - /:/host:ro,rslave
+      - /proc:/host/proc:ro,rslave
+      - /run/udev:/run/udev:ro
+      - /run/dbus:/run/dbus:rw
+      - /run/systemd:/run/systemd:rw
+    cap_add:
+      - SYS_TIME
+      - SYS_PTRACE
+    pid: host
+    network_mode: host
+    privileged: true
+    restart: unless-stopped
+
+  cadvisor:
+    container_name: cadvisor
+    image: spritsail/cadvisor
+    command:
+      - --logtostderr
+      - --tls_cert_path=/pki/web.spritsail.io.crt
+      - --tls_key_path=/pki/web.spritsail.io.key
+      - --tls_ca_path=/pki/certs/root_ca.crt
+      - --tls_client_auth=require
+      - --disable_metrics=tcp,udp,percpu,hugetlb,referenced_memory,advtcp,sched
+      - --profiling=true
+      - --store_container_labels=false
+      - --whitelisted_container_labels=com.docker.compose.project,com.docker.compose.service
+    devices:
+      - /dev/kmsg
+    volumes:
+      - /volumes/metrics/pki:/pki:ro
+      - /:/rootfs:ro
+      - /dev/disk/:/dev/disk:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /var/run:/var/run:ro
+    pid: host
+    network_mode: host
+    privileged: true
+    restart: unless-stopped
+
+  blackbox-exporter:
+    container_name: blackbox-exporter
+    image: prom/blackbox-exporter
+    command:
+      - --web.config.file=/pki/exporter-tls.yml
+      - --config.file=/config/blackbox.yml
+    cap_add:
+      - NET_RAW
+    volumes:
+      - /volumes/metrics/pki:/pki:ro
+      - /volumes/metrics/blackbox.yml:/config/blackbox.yml
+    network_mode: host
+    restart: unless-stopped
