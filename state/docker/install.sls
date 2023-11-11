@@ -1,10 +1,12 @@
-docker_repo:
-  pkgrepo.managed:
-    - name: deb https://download.docker.com/linux/{{ grains.os|lower }} {{ grains.oscodename }} stable
-    - file: /etc/apt/sources.list.d/docker.list
-    - key_url: https://download.docker.com/linux/debian/gpg
-    - architectures: {{ grains.osarch }}
-    - refresh: true
+/etc/apt/sources.list.d/docker.sources:
+  file.managed:
+    - source: salt://{{ slspath }}/docker.sources.jinja
+    - template: jinja
+    - makedirs: true
+    - mode: 644
+    - dirmode: 755
+    - user: root
+    - group: root
 
 docker-deps:
   pkg.latest:
@@ -14,7 +16,7 @@ docker-deps:
       - docker-ce-cli
       - python3-pip
     - require:
-      - pkgrepo: docker_repo
+      - file: /etc/apt/sources.list.d/docker.sources
 
 docker-ce:
   pkg.installed:
