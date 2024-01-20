@@ -65,7 +65,7 @@ cephsvc ssh key:
     - device: admin@.swarm_persist=/
     - ops: rw
 {% else %}
-    - device: 192.168.1.30,192.168.1.81,192.168.1.84:/
+    - device: 192.168.1.81,192.168.1.82:/
     - ops: rw,name=admin
 {% endif %}
     - fstype: ceph
