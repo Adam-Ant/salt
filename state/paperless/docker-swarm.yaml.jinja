@@ -12,7 +12,7 @@ services:
       PAPERLESS_TIKA_ENABLED: 1
       PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
-      PAPERLESS_URL: https://paperless.adam-ant.co.uk
+      PAPERLESS_URL: https://paperless.{{ domain }}
       PAPERLESS_TIME_ZONE: Europe/London
       PAPERLESS_OCR_LANGUAGE: eng
       PAPERLESS_SECRET_KEY: {{ secret_key }}
@@ -34,14 +34,14 @@ services:
     deploy:
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.paperless.rule=Host(`paperless.adam-ant.co.uk`)"
+        - "traefik.http.routers.paperless.rule=Host(`paperless.{{ domain }}`)"
         - "traefik.http.routers.paperless.middlewares=authentik@file"
         - "traefik.http.services.paperless.loadbalancer.server.port=8000"
         - "homepage.name=Paperless"
         - "homepage.group=Info Management"
         - "homepage.description=Document management & storage solution"
         - "homepage.icon=mdi-file-document-multiple"
-        - "homepage.href=https://paperless.adam-ant.co.uk"
+        - "homepage.href=https://paperless.{{ domain }}"
 
   gotenberg:
     image: gotenberg/gotenberg:7.4
