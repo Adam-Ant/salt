@@ -17,3 +17,5 @@ include:
     - dirmode: 755
     - user: root
     - group: root
+    - template: jinja
+    - context: {{ pillar.global| json }}

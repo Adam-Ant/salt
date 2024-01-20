@@ -11,23 +11,23 @@ services:
         window: 10s
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.bitwarden.rule=Host(`bitwarden.adam-ant.co.uk`)"
+        - "traefik.http.routers.bitwarden.rule=Host(`bitwarden.{{ domain }}`)"
         - "traefik.http.services.bitwarden.loadbalancer.server.port=80"
         - "traefik.http.routers.bitwarden.service=bitwarden"
-        - "traefik.http.routers.bitwarden-websocket.rule=Host(`bitwarden.adam-ant.co.uk`) && Path(`/notifications/hub`)"
+        - "traefik.http.routers.bitwarden-websocket.rule=Host(`bitwarden.{{ domain }}`) && Path(`/notifications/hub`)"
         - "traefik.http.routers.bitwarden-websocket.service=bitwarden-websocket"
         - "traefik.http.services.bitwarden-websocket.loadbalancer.server.port=3012"
         - "homepage.name=Bitwarden"
         - "homepage.group=Info Management"
         - "homepage.description=Password Manager"
         - "homepage.icon=si-bitwarden"
-        - "homepage.href=https://bitwarden.adam-ant.co.uk"
+        - "homepage.href=https://bitwarden.{{ domain }}"
     environment:
       WEBSOCKET_ENABLED: 'true'
       SIGNUPS_ALLOWED: 'false'
       INVITATIONS_ALLOWED: 'true'
       #ADMIN_TOKEN: 'TokenToEnableAdminPanel'
-      DOMAIN: 'https://bitwarden.adam-ant.co.uk'
+      DOMAIN: 'https://bitwarden.{{ domain }}'
       SHOW_PASSWORD_HINT: 'false'
 
 networks:
