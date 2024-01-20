@@ -14,13 +14,13 @@ services:
         window: 10s
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.homeassistant.rule=Host(`ha.adam-ant.co.uk`)"
+        - "traefik.http.routers.homeassistant.rule=Host(`ha.{{ domain }}`)"
         - "traefik.http.services.homeassistant.loadbalancer.server.port=8123"
         - "homepage.name=Home Assistant"
         - "homepage.group=Automation"
         - "homepage.description=Home Automation controller"
         - "homepage.icon=si-homeassistant"
-        - "homepage.href=https://ha.adam-ant.co.uk"
+        - "homepage.href=https://ha.{{ domain }}"
     networks:
       - default
       - network_public
@@ -33,6 +33,7 @@ services:
       restart_policy:
         delay: 10s
         window: 10s
+      labels:
         - "homepage.name=Zigbee2MQTT"
         - "homepage.group=Automation"
         - "homepage.description=Zigbee gateway & controller"

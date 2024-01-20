@@ -15,12 +15,14 @@ home-assistant-directories:
 
 /volumes/swarm-files/ha.yaml:
   file.managed:
-    - source: salt://{{ slspath }}/docker-swarm.yaml
+    - source: salt://{{ slspath }}/docker-swarm.yaml.jinja
     - makedirs: true
     - mode: 644
     - dirmode: 755
     - user: root
     - group: root
+    - template: jinja
+    - context: {{ pillar.global | json }}
 
 /volumes/ha/mosquitto/config/credentials:
   file.managed:
