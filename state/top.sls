@@ -36,6 +36,7 @@
     - tgvideobot
     - homepage
     - epicgames-free
+    - podfetch
   'oracledronerunner':
     - drone-runner
   'ceph.lan':

@@ -1,0 +1,26 @@
+version: '3.9'
+services:
+  podfetch:
+    image: samuel19982/podfetch:latest
+    volumes:
+      - /volumes/podfetch/podcasts:/app/podcasts
+      - /volumes/podfetch/db:/app/db
+    environment:
+      - POLLING_INTERVAL=30
+      - SERVER_URL=https://podfetch.{{ domain }}
+      - GPODDER_INTEGRATION_ENABLED=true
+      - REVERSE_PROXY=true
+    deploy:
+      mode: global
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.homepage.rule=Host(`podfetch.{{ domain }}`)"
+        - "traefik.http.routers.homepage.middlewares=authentik@file"
+        - "traefik.http.services.homepage.loadbalancer.server.port=8000"
+      placement:
+        constraints: [node.role == manager]
+
+networks:
+  default:
+    name: network_public
+    external: true
