@@ -10,7 +10,7 @@ services:
       mode: global
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.homepage.rule=Host(`home.adam-ant.co.uk`)"
+        - "traefik.http.routers.homepage.rule=Host(`{{ domain }}`)"
         - "traefik.http.routers.homepage.middlewares=authentik@file"
         - "traefik.http.services.homepage.loadbalancer.server.port=3000"
       placement:

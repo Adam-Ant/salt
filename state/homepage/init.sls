@@ -10,9 +10,11 @@ include:
 
 /volumes/swarm-files/homepage.yaml:
   file.managed:
-    - source: salt://{{ slspath }}/docker-swarm.yaml
+    - source: salt://{{ slspath }}/docker-swarm.yaml.jinja
     - makedirs: true
     - mode: 644
     - dirmode: 755
     - user: root
     - group: root
+    - template: jinja
+    - context: {{ pillar.global | json }}
