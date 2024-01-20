@@ -9,6 +9,6 @@ services:
     deploy:
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.epicgamesfree.rule=Host(`epicgames.adam-ant.co.uk`)"
+        - "traefik.http.routers.epicgamesfree.rule=Host(`epicgames.{{ domain }}`)"
         - "traefik.http.services.epicgamesfree.loadbalancer.server.port=3000"
 

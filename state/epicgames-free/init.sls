@@ -16,6 +16,8 @@ include:
 /volumes/swarm-files/epicgames-free.yaml:
   file.managed:
     - source: salt://{{ slspath }}/docker-swarm.yaml
+    - template: jinja
+    - context: {{ pillar["epicgames-free"] | json }}
     - makedirs: true
     - mode: 644
     - dirmode: 755
