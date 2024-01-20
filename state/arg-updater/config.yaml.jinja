@@ -45,16 +45,14 @@ spritsail/nzbget@testing:
 spritsail/sonarr:
   args:
     SONARR_VER:
-      url: https://services.sonarr.tv/v1/update/master?version=3&os=linux-musl
-      structure: updatePackage.version
-      human_name: Sonarr
-
-spritsail/sonarr@beta:
-  args:
-    SONARR_VER:
       url: https://services.sonarr.tv/v1/update/develop?version=4&os=linux-musl
       structure: updatePackage.version
-      human_name: Sonarr
+      human_name: Sonarr version
+    SONARR_BRANCH:
+      url: https://services.sonarr.tv/v1/update/develop?version=4&os=linux-musl
+      structure: updatePackage.filename
+      version_regex: Sonarr\.([^\.]+)\..*
+      human_name: release branch
 
 spritsail/radarr:
   args:
