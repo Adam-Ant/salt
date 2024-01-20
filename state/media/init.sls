@@ -3,7 +3,6 @@ include:
 - traefik.network
 
 {% set uidPairs = {
-  'organizr': '971',
   'nzbget':   901,
   'prowlarr': 911,
   'sonarr':   921,
