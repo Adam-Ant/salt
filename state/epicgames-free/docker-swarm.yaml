@@ -12,3 +12,7 @@ services:
         - "traefik.http.routers.epicgamesfree.rule=Host(`epicgames.{{ domain }}`)"
         - "traefik.http.services.epicgamesfree.loadbalancer.server.port=3000"
 
+networks:
+  default:
+    name: network_public
+    external: true
