@@ -36,7 +36,7 @@ services:
       AUTHENTIK_POSTGRESQL__HOST: postgresql
       AUTHENTIK_POSTGRESQL__USER: authentik
       AUTHENTIK_POSTGRESQL__NAME: authentik
-      AUTHENTIK_COOKIE_DOMAIN: adam-ant.co.uk
+      AUTHENTIK_COOKIE_DOMAIN: {{ domain }}
       AUTHENTIK_SECRET_KEY: {{ secret_key }}
       AUTHENTIK_POSTGRESQL__PASSWORD: {{ postgres_password }}
       AUTHENTIK_EMAIL__HOST: {{ smtp.host }}
@@ -54,14 +54,14 @@ services:
     deploy:
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.authentik.rule=Host(`authentik.adam-ant.co.uk`)"
+        - "traefik.http.routers.authentik.rule=Host(`auth.{{ domain }}`)"
         - "traefik.http.services.authentik.loadbalancer.server.port=9000"
-        - "traefik.http.routers.authentik-outpost.rule=HostRegexp(`{subdomain:[a-z0-9-]+}.adam-ant.co.uk`) && PathPrefix(`/outpost.goauthentik.io/`)"
+        - "traefik.http.routers.authentik-outpost.rule=HostRegexp(`{subdomain:[a-z0-9-]+}.{{ domain }}`) && PathPrefix(`/outpost.goauthentik.io/`)"
         - "homepage.name=Authentik"
         - "homepage.group=Infrastructure"
         - "homepage.description=SSO Provider"
         - "homepage.icon=si-webauthn"
-        - "homepage.href=https://authentik.adam-ant.co.uk"
+        - "homepage.href=https://auth.{{ domain }}"
 
 
   worker:
@@ -72,7 +72,7 @@ services:
       AUTHENTIK_POSTGRESQL__HOST: postgresql
       AUTHENTIK_POSTGRESQL__USER: authentik
       AUTHENTIK_POSTGRESQL__NAME: authentik
-      AUTHENTIK_COOKIE_DOMAIN: adam-ant.co.uk
+      AUTHENTIK_COOKIE_DOMAIN: {{ domain }}
       AUTHENTIK_SECRET_KEY: {{ secret_key }}
       AUTHENTIK_POSTGRESQL__PASSWORD: {{ postgres_password }}
       AUTHENTIK_EMAIL__HOST: {{ smtp.host }}

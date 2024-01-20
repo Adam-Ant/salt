@@ -12,6 +12,8 @@ traefik_config_files:
     - dir_mode: 755
     - file_mode: 644
     - clean: false
+    - template: jinja
+    - context: {{ pillar.traefik | json }}
 
 traefik_certs:
   file.recurse:

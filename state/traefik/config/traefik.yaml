@@ -10,6 +10,14 @@ providers:
     watch: true
     directory: /etc/traefik/configs
 
+certificateresolvers:
+  letsencrypt:
+    acme:
+      dnsChallenge:
+        provider: cloudflare
+      email: {{ email }}
+      storage: "/etc/traefik/acme.json"
+
 entryPoints:
   web:
     address: ":80"
@@ -22,7 +30,12 @@ entryPoints:
   websecure:
     address: ":443"
     http:
-      tls: {}
+      tls:
+        certResolver: letsencrypt
+        domains:
+          - main: "{{ domain }}"
+            sans:
+              - "*.{{ domain }}"
 
 
 log:
