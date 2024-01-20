@@ -10,7 +10,7 @@ providers:
     watch: true
     directory: /etc/traefik/configs
 
-certificateresolvers:
+certificatesResolvers:
   letsencrypt:
     acme:
       dnsChallenge:

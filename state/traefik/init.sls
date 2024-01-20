@@ -4,7 +4,7 @@ include:
 
 traefik_config_files:
   file.recurse:
-    - name: /volumes/traefik/config
+    - name: /volumes/traefik
     - source: salt://{{ slspath }}/config/
     - makedirs: true
     - user: root
@@ -15,23 +15,13 @@ traefik_config_files:
     - template: jinja
     - context: {{ pillar.traefik | json }}
 
-traefik_certs:
-  file.recurse:
-    - name: /volumes/traefik/certs
-    - source: salt://nginx/certs/
-    - makedirs: true
-    - user: root
-    - group: root
-    - dir_mode: 700
-    - file_mode: 600
-    - clean: false
-    - show_changes: false
-
 /volumes/swarm-files/traefik.yaml:
   file.managed:
-    - source: salt://{{ slspath }}/docker-swarm.yaml
+    - source: salt://{{ slspath }}/docker-swarm.yaml.jinja
     - makedirs: true
     - mode: 644
     - dirmode: 755
     - user: root
     - group: root
+    - template: jinja
+    - context: {{ pillar.traefik | json }}

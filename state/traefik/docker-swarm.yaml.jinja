@@ -16,9 +16,11 @@ services:
         published: 4563
         protocol: tcp
     volumes:
-      - "/volumes/traefik/config:/etc/traefik"
-      - "/volumes/traefik/certs:/certs"
+      - "/volumes/traefik:/etc/traefik"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    environment:
+      - CLOUDFLARE_EMAIL={{ cloudflare.email }}
+      - CLOUDFLARE_DNS_API_TOKEN={{ cloudflare.token }}
     deploy:
       mode: global
       placement:
