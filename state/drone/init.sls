@@ -22,9 +22,12 @@ include:
 /volumes/drone-notify/notify.conf:
   file.managed:
     - makedirs: true
+    - show_changes: false
     - contents: |
         [main]
+        debug = true
         token = {{ pillar.drone.notify.token }}
+        secret = {{ pillar.drone.webhook_secret }}
 
         [channels]
 {%- for name, id in pillar.drone.notify.channels.items() %}

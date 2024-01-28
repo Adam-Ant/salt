@@ -16,7 +16,6 @@ services:
       - DRONE_DATABASE_DATASOURCE=/var/lib/drone/drone.sqlite
       - DRONE_STARLARK_ENABLED=true
 
-
       # Configuration for remote agents
       - DRONE_AGENTS_ENABLED=true
       - DRONE_RPC_PROTO=https
@@ -28,6 +27,7 @@ services:
       - DRONE_LOGS_PRETTY=true
       - DRONE_LOGS_COLOR=true
       - DRONE_WEBHOOK_ENDPOINT=http://drone-notify:5000/hook
+      - DRONE_WEBHOOK_SECRET={{ webhook_secret }}
     networks:
       - drone
       - nginx_proxy
