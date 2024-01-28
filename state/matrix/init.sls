@@ -21,6 +21,9 @@ include:
     - dataset:
         m.homeserver:
           base_url: https://matrix.spritsail.io
+        # Element-X/matrix-rust-sdk requires this for now
+        org.matrix.msc3575.proxy:
+          url: https://matrix.spritsail.io
 
 /volumes/matrix:
   file.directory:
