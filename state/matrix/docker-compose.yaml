@@ -13,6 +13,14 @@ services:
       CONDUIT_CONFIG: /etc/conduit/config.toml
     restart: unless-stopped
 
+  maubot:
+    image: dock.mau.dev/maubot/maubot
+    volumes:
+      - /volumes/matrix/maubot:/data:z
+    networks:
+      - nginx_proxy
+    restart: on-failure
+
 networks:
   nginx_proxy:
     external: true
