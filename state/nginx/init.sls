@@ -38,12 +38,15 @@ nginx_certs:
 /etc/docker-compose/nginx/docker-compose.yaml:
   file.managed:
     - source: salt://{{ slspath }}/docker-compose.yaml.jinja
+    - template: jinja
+    - context:
+        bind_ip: {{ salt.pillar.get('nginx:bind_ip', '0.0.0.0') | json }}
+        extra_binds: {{ salt.pillar.get('nginx:extra_binds', []) | json }}
     - makedirs: true
     - user: root
     - group: root
     - mode: 600
     - dirmode: 700
-    - template: jinja
 
 nginx:
   dockercompose.up:

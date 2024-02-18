@@ -1,5 +1,3 @@
-{% set bind_ip = salt.pillar.get('nginx:bind_ip', '0.0.0.0') %}
-
 version: "2.0"
 
 services:
@@ -8,7 +6,7 @@ services:
     container_name: nginx
     restart: unless-stopped
     depends_on:
-         - php
+      - php
     volumes:
       - /volumes/web/certs:/certs
       - /volumes/web/conf:/etc/nginx/conf.d
@@ -16,11 +14,9 @@ services:
     ports:
       - {{ bind_ip }}:443:443
       - {{ bind_ip }}:80:80
-    {% if salt.pillar.get('nginx:extra_binds') %}
-    {% for ip in salt.pillar.get('nginx:extra_binds') %}
-      - {{ ip }}
-    {% endfor %}
-    {% endif %}
+{%- for bind in extra_binds %}
+      - {{ bind | yaml }}
+{%- endfor %}
     networks:
       - backend
       - proxy
@@ -40,4 +36,3 @@ services:
 networks:
   backend:
   proxy:
-
