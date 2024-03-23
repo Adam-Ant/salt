@@ -13,4 +13,4 @@ services:
       - WATCHTOWER_CLEANUP={{ salt.pillar.get('watchtower:cleanup', 'true') }}
       - WATCHTOWER_NOTIFICATIONS=shoutrrr
       - WATCHTOWER_NOTIFICATION_URL={{ notification_url }}
-      - WATCHTOWER_NOTIFICATION_TEMPLATE={% raw %}{{if .}}<b>Watchtower-{% endraw %}{{ grains.host }}{% raw %}</b>{{println}}{{end}}{{range .}}{{.Message}}{{println}}{{end}}{{end}}{% endraw %}
+      - WATCHTOWER_NOTIFICATION_TEMPLATE={% raw %}{{if .}}<strong>Watchtower-{% endraw %}{{ grains.host }}{% raw %}</strong><br/>{{range .}}{{.Message}}<br/>{{end}}{{end}}{% endraw %}
