@@ -33,6 +33,24 @@ services:
     networks:
       - backend
 
+  acme:
+    image: spritsail/acme.sh
+    container_name: acme.sh
+    command: daemon
+    tty: true
+    volumes:
+    - /volumes/web/certs/:/acme.sh
+    # To allow acme.sh post-renew hooks to restart/reload services
+    - /run/docker.sock:/run/docker.sock
+{%- for key, val in salt.pillar.get('acme.sh:envvars', {}).items() %}
+  {%- if loop.first %}
+    environment:
+  {%- endif %}
+      {{ key | yaml }}: {{ val | yaml }}
+{%- endfor %}
+    network_mode: bridge
+    restart: unless-stopped
+
 networks:
   backend:
   proxy:
