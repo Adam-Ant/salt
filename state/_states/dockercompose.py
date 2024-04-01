@@ -47,7 +47,7 @@ def up(name, **kwargs):  # pylint: disable=invalid-name
         ret["comment"] = err.message if hasattr(err, "message") else str(err)
         return ret
 
-    test = kwargs.pop("test", False)
+    test = __opts__["test"]
     pull = kwargs.pop("pull", False)
     recreate = kwargs.pop("force_recreate", False)
     service_names = kwargs.pop("services", None)
@@ -74,17 +74,20 @@ def up(name, **kwargs):  # pylint: disable=invalid-name
     for cont in plans:
         (action, _) = plans[cont]
         log.debug("docker-compose action for %s is %s", cont, action)
-        if action != "noop":
-            if action == "create":
-                ret["changes"][cont] = "Creating container"
-            elif action == "recreate":
-                ret["changes"][cont] = "Re-creating container"
-            elif action == "start":
-                ret["changes"][cont] = "Starting container"
+        if action in ["create", "recreate", "start"]:
+            ret["changes"][cont] = (
+                f"Would {action} container"
+                if test
+                else f"{action.removesufffix('e').title()}ed container"
+            )
 
     # Nothing to do; exit early
-    if len(ret["changes"]) == 0 or test:
+    if len(ret["changes"]) == 0:
         ret["result"] = True
+        return ret
+
+    if test:
+        ret["result"] = None if ret["changes"] else True
         return ret
 
     try:
