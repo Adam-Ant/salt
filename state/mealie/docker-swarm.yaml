@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:v1.4.0
+    volumes:
+      - /volumes/mealie:/app/data/
+    deploy:
+      restart_policy:
+        delay: 10s
+        window: 10s
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.mealie.rule=Host(`mealie.{{ domain }}`)"
+        - "traefik.http.routers.mealie.middlewares=authentik@file"
+        - "traefik.http.services.mealie.loadbalancer.server.port=9000"
+        - "homepage.name=Mealie"
+        - "homepage.group=Info Management"
+        - "homepage.description=Recipie Manager"
+        - "homepage.icon=mdi-file-document-multiple"
+        - "homepage.href=https://mealie.{{ domain }}"
+    environment:
+      # Set Backend ENV Variables Here
+      ALLOW_SIGNUP: false
+      TZ: Europe/London
+      MAX_WORKERS: 1
+      WEB_CONCURRENCY: 1
+      BASE_URL: 'https://mealie.{{ domain }}'
+
+networks:
+  default:
+    name: network_public
+    external: true

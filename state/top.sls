@@ -37,6 +37,7 @@
     - homepage
     - epicgames-free
     - podfetch
+    - mealie
   'oracledronerunner':
     - drone-runner
   'ceph.lan':
