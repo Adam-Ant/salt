@@ -22,9 +22,9 @@ docker-ce:
   pkg.installed:
     - version: {{ salt.pillar.get("docker:version", "latest") }}
 
-docker-compose:
-  pip.installed:
-    - version: {{ salt.pillar.get("docker-compose:version", "latest") }}
+#docker-compose:
+#  pip.installed:
+#  - version: {{ salt.pillar.get("docker-compose:version", "latest") }}
 
 /etc/docker-compose:
   file.directory:
