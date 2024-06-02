@@ -50,7 +50,7 @@ cephsvc ssh key:
     - user: root
     - group: root
 
-/etc/ceph/ceph.client.admin.keyring:
+/etc/ceph/ceph.keyring:
   file.managed:
     - source: salt://{{ slspath }}/admin.keyring
     - makedirs: true
