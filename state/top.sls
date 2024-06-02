@@ -42,3 +42,6 @@
     - drone-runner
   'ceph.lan':
     - ceph
+  'ValheimServer':
+    - ceph
+    - watchtower
