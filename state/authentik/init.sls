@@ -5,7 +5,7 @@ include:
 {% set uidPairs = {
   'certs': 'root',
   'custom-templates': 'root',
-  'media': 'root',
+  'media': '1000',
   'postgres': 70,
   'redis': 999,
   'templates': 'root'
