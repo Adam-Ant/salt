@@ -21,7 +21,7 @@ services:
         - "homepage.href=https://mealie.{{ domain }}"
     environment:
       # Set Backend ENV Variables Here
-      ALLOW_SIGNUP: false
+      ALLOW_SIGNUP: "false"
       TZ: Europe/London
       MAX_WORKERS: 1
       WEB_CONCURRENCY: 1
