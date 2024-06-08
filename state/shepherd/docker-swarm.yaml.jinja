@@ -11,11 +11,7 @@ services:
       VERBOSE: 'true'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - notification
     deploy:
       placement:
         constraints:
           - node.role == manager
-networks:
-  notification:
