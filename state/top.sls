@@ -38,6 +38,7 @@
     - epicgames-free
     - podfetch
     - mealie
+    - shepherd
   'oracledronerunner':
     - drone-runner
   'ceph.lan':

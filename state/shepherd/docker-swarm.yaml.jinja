@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  app:
+    image: containrrr/shepherd
+    environment:
+      APPRISE_SIDECAR_URL: "{{ notification_url }}"
+      TZ: 'Europe/London'
+      SLEEP_TIME: '6h'
+      FILTER_SERVICES: ''
+      VERBOSE: 'true'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - notification
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+networks:
+  notification:
