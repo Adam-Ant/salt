@@ -59,13 +59,8 @@ cephsvc ssh key:
 
 /volumes:
   mount.mounted:
-{% if grains['oscodename'] != 'bookworm' %}
     - device: admin@.swarm_persist=/
     - ops: rw
-{% else %}
-    - device: 192.168.1.81,192.168.1.82:/
-    - ops: rw,name=admin
-{% endif %}
     - fstype: ceph
     - mkmnt: True
     - persist: True
