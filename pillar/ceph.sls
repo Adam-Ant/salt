@@ -1,3 +1,3 @@
 ceph:
-  debian_ver: bullseye
-  version: quincy
+  debian_ver: bookworm
+  version: reef
