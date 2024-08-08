@@ -46,3 +46,5 @@
   'ValheimServer':
     - ceph
     - watchtower
+  'DockerOps.lan':
+    - ceph
