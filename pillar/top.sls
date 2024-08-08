@@ -3,7 +3,6 @@
     - users
     - docker
     - secret
-    - ceph
     - guacamole
 
   'PiCluster-*':

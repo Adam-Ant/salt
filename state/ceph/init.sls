@@ -1,9 +1,15 @@
+{% if grains.oscodename == "bullseye" %}
+{% set cephversion = "quincy" %}
+{% else %}
+{% set cephversion = "reef" %}
+{% endif %}
+
 include:
   - docker
 
 ceph repo:
   pkgrepo.managed:
-    - name: deb https://download.ceph.com/{{ grains.os|lower }}-{{ salt.pillar.get("ceph:version", "reef") }} {{ salt.pillar.get("ceph:debian_ver", grains.oscodename | lower) }} main
+    - name: deb https://download.ceph.com/{{ grains.os | lower }}-{{ cephversion }} {{ grains.oscodename | lower }} main
     - file: /etc/apt/sources.list.d/ceph.list
     - key_url: https://download.ceph.com/keys/release.gpg
     - architectures: {{ grains.osarch }}
