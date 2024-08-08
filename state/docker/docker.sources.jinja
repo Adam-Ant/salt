@@ -3,6 +3,9 @@ URIs: https://download.docker.com/linux/{{ grains.os | lower }}
 Suites: {{ grains.oscodename }}
 Components: stable
 Architectures: amd64
+{% if grains.osmajorrelease < 12 -%}
+Signed-By: /usr/share/keyrings/docker-archive-keyring.gpg
+{% else -%}
 Signed-By:
  -----BEGIN PGP PUBLIC KEY BLOCK-----
  .
@@ -66,3 +69,4 @@ Signed-By:
  YT90qFF93M3v01BbxP+EIY2/9tiIPbrd
  =0YYh
  -----END PGP PUBLIC KEY BLOCK-----
+{%- endif -%}

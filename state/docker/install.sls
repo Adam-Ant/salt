@@ -1,3 +1,12 @@
+{% if grains.osmajorrelease < 12 %}
+/usr/share/keyrings/docker-archive-keyring.gpg:
+  file.managed:
+    - source: salt://{{ slspath }}/docker.gpg
+    - mode: 644
+    - user: root
+    - group: root
+{% endif %}
+
 /etc/apt/sources.list.d/docker.sources:
   file.managed:
     - source: salt://{{ slspath }}/docker.sources.jinja
