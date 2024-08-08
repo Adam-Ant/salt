@@ -65,7 +65,7 @@ cephsvc ssh key:
 
 /volumes:
   mount.mounted:
-    - device: admin@.swarm_persist=/
+    - device: {{ pillar.ceph.device }}
     - ops: rw
     - fstype: ceph
     - mkmnt: True
