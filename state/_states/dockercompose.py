@@ -78,7 +78,7 @@ def up(name, **kwargs):  # pylint: disable=invalid-name
             ret["changes"][cont] = (
                 f"Would {action} container"
                 if test
-                else f"{action.removesufffix('e').title()}ed container"
+                else f"{action.removesuffix('e').title()}ed container"
             )
 
     # Nothing to do; exit early
