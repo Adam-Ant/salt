@@ -48,3 +48,4 @@
     - watchtower
   'DockerOps.lan':
     - ceph
+    - restic

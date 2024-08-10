@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://creativeprojects.github.io/resticprofile/jsonschema/config-1.json
+
+version: "1"
+
+global:
+  scheduler: crond
+
+includes:
+  - "includes.d/*.yaml"
+
+default:
+  repository: "{{ repo }}"
+  password-file: "key"
+  no-scan: false
+  backup:
+    verbose: true
+    schedule: "*-*-* 02,14:30:00"
+

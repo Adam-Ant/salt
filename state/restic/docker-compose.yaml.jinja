@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  scheduled-backup:
+    image: creativeprojects/resticprofile:latest
+    hostname: restic-backup
+    entrypoint: '/bin/sh'
+    command:
+      - '-c'
+      - 'resticprofile schedule --all && crond -f'
+    volumes:
+      - '/etc/restic/profiles.yaml:/etc/resticprofile/profiles.yaml:ro'
+      - '/etc/restic/key:/etc/resticprofile/key:ro'
+      - '/etc/restic/includes.d:/etc/resticprofile/includes.d'
+      - 'adam-backup:/backupSource/adam'
+      - 'volumes-backup:/backupSource/volumes'
+    environment:
+      - TZ=Europe/London
+      - AWS_ACCESS_KEY_ID={{ bucket_access_key }}
+      - AWS_SECRET_ACCESS_KEY={{ bucket_secret_key }}
+
+volumes:
+  adam-backup:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: nfsvers=4,addr={{ nfs_server }},ro
+      device: ":/mnt/user/adam"
+  volumes-backup:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/volumes"
+      o: bind,ro
