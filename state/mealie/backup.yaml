@@ -1,0 +1,6 @@
+mealie:
+  inherit: base
+  backup:
+    source:
+      - "/backupSource/volumes/mealie"
+

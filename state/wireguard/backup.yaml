@@ -1,0 +1,6 @@
+wireguard:
+  inherit: base
+  backup:
+    source:
+      - "/backupSource/volumes/wireguard"
+

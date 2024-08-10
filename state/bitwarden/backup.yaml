@@ -1,0 +1,6 @@
+bitwarden:
+  inherit: base
+  backup:
+    source:
+      - "/backupSource/volumes/bitwarden"
+

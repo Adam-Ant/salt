@@ -18,3 +18,11 @@ include:
     - group: root
     - template: jinja
     - context: {{ pillar.global | json }}
+
+/volumes/restic-targets/homepage.yaml:
+  file.managed:
+    - source: salt://{{ slspath }}/backup.yaml
+    - mode: 644
+    - user: root
+    - group: root
+

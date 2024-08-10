@@ -36,3 +36,11 @@ home-assistant-directories:
 {%- endfor %}
     - require:
       - file: home-assistant-directories
+
+/volumes/restic-targets/ha.yaml:
+  file.managed:
+    - source: salt://{{ slspath }}/backup.yaml
+    - mode: 644
+    - user: root
+    - group: root
+

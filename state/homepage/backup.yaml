@@ -1,0 +1,9 @@
+ha:
+  inherit: base
+  backup:
+    source:
+      - "/backupSource/volumes/homepage"
+    exclude:
+
+      - "/backupSource/volumes/homepage/logs"
+

@@ -1,0 +1,9 @@
+paperless:
+  inherit: base
+  backup:
+    source:
+      - "/backupSource/volumes/paperless"
+    exclude:
+      - "/backupSource/volumes/paperless/data/log"
+
+

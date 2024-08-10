@@ -1,0 +1,23 @@
+media:
+  inherit: base
+  backup:
+    source:
+      - "/backupSource/volumes/media/lidarr"
+      - "/backupSource/volumes/media/nzbget"
+      - "/backupSource/volumes/media/plex"
+      - "/backupSource/volumes/media/prowlarr"
+      - "/backupSource/volumes/media/sonarr"
+      - "/backupSource/volumes/media/radarr"
+      - "/backupSource/volumes/media/tautulli"
+    exclude:
+      - "/backupSource/volumes/media/lidarr/logs*"
+      - "/backupSource/volumes/media/nzbget/nzbget*.log"
+      - "/backupSource/volumes/media/nzbget/nzb"
+      - "/backupSource/volumes/media/nzbget/queue"
+      - "/backupSource/volumes/media/plex/Logs"
+      - "/backupSource/volumes/media/plex/Media"
+      - "/backupSource/volumes/media/prowlarr/logs*"
+      - "/backupSource/volumes/media/sonarr/logs*"
+      - "/backupSource/volumes/media/radarr/logs*"
+      - "/backupSource/volumes/media/tautulli/logs"
+      - "/backupSource/volumes/media/tautulli/cache"

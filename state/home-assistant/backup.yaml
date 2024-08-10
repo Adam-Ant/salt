@@ -1,0 +1,14 @@
+ha:
+  inherit: base
+  backup:
+    source:
+      - "/backupSource/volumes/ha/hass"
+      - "/backupSource/volumes/ha/mosquitto"
+      - "/backupSource/volumes/ha/zigbee"
+    exclude:
+      - "/backupSource/volumes/ha/hass/www/albumart/art.png"
+      - "/backupSource/volumes/ha/hass/home-assistant.log*"
+      - "/backupSource/volumes/ha/hass/tts"
+      - "/backupSource/volumes/ha/zigbee/log"
+
+

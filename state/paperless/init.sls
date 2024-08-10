@@ -29,3 +29,11 @@ include:
     - dirmode: 0700
     - user: root
     - group: root
+
+/volumes/restic-targets/paperless.yaml:
+  file.managed:
+    - source: salt://{{ slspath }}/backup.yaml
+    - mode: 644
+    - user: root
+    - group: root
+
