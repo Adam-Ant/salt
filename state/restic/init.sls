@@ -20,7 +20,7 @@ include:
     - group: root
     - mode: 600
 
-/etc/restic/includes.d:
+/volumes/restic-targets:
   file.recurse:
     - source: salt://{{ slspath }}/includes.d #in secrets
     - user: root

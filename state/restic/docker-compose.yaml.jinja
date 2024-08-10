@@ -11,7 +11,7 @@ services:
     volumes:
       - '/etc/restic/profiles.yaml:/etc/resticprofile/profiles.yaml:ro'
       - '/etc/restic/key:/etc/resticprofile/key:ro'
-      - '/etc/restic/includes.d:/etc/resticprofile/includes.d'
+      - '/volumes/restic-targets:/etc/resticprofile/includes.d'
       - 'adam-backup:/backupSource/adam'
       - 'volumes-backup:/backupSource/volumes'
     environment:
