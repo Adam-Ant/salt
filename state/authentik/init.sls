@@ -30,3 +30,10 @@ include:
     - dirmode: 0700
     - user: root
     - group: root
+
+/volumes/restic-targets/authentik.yaml:
+  file.managed:
+    - source: salt://{{ slspath }}/backup.yaml
+    - mode: 644
+    - user: root
+    - group: root

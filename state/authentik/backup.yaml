@@ -1,0 +1,7 @@
+default:
+  backup:
+    source:
+      - "/backupSource/volumes/authentik"
+    exclude:
+      - "/backupSource/volumes/authentik/redis"
+
