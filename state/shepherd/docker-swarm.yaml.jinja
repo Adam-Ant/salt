@@ -5,6 +5,7 @@ services:
     image: containrrr/shepherd
     environment:
       APPRISE_SIDECAR_URL: "{{ notification_url }}"
+      IGNORELIST_SERVICES: "label=shepherd.enable=false"
       TZ: 'Europe/London'
       SLEEP_TIME: '6h'
       FILTER_SERVICES: ''
