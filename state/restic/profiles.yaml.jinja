@@ -4,6 +4,7 @@ version: "1"
 
 global:
   scheduler: crond
+  restic-stale-lock-age: 12h
 
 includes:
   - "includes.d/*.yaml"
@@ -12,7 +13,10 @@ base:
   repository: "{{ repo }}"
   password-file: "key"
   no-scan: false
+  lock: "/tmp/resticprofile-global.lock"
+  force-inactive-lock: true
   backup:
     verbose: true
     schedule: "*-*-* 02,14:30:00"
+    schedule-permission: system
 
