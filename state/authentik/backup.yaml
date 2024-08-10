@@ -1,4 +1,5 @@
-default:
+authentik:
+  inherit: base
   backup:
     source:
       - "/backupSource/volumes/authentik"

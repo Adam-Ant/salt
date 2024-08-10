@@ -7,7 +7,7 @@ services:
     entrypoint: '/bin/sh'
     command:
       - '-c'
-      - 'resticprofile schedule --all && crond -f'
+      - "echo '15 * * * * resticprofile schedule --all' >> /etc/crontabs/root && resticprofile schedule --all && crond -f"
     volumes:
       - '/etc/restic/profiles.yaml:/etc/resticprofile/profiles.yaml:ro'
       - '/etc/restic/key:/etc/resticprofile/key:ro'
