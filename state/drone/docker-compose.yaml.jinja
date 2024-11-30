@@ -1,5 +1,3 @@
-version: '2.0'
-
 services:
   drone:
     image: spritsail/drone
@@ -40,7 +38,13 @@ services:
       - /volumes/drone-notify:/config
     networks:
       - drone
-    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 10
+        window: 120s
+
 
 networks:
   drone:
