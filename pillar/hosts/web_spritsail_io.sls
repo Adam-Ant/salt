@@ -1,8 +1,10 @@
 docker:
   options:
     ipv6: true
-    ip6tables: true
-    fixed-cidr-v6: fd00:d0c:7e4::/48
+    default-network-opts:
+      bridge:
+        com.docker.network.enable_ipv4: "true"
+        com.docker.network.enable_ipv6: "true"
 
 nginx:
   bind_ip: 51.38.73.115
