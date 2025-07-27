@@ -14,3 +14,4 @@ services:
       - WATCHTOWER_NOTIFICATIONS=shoutrrr
       - WATCHTOWER_NOTIFICATION_URL={{ notification_url }}
       - WATCHTOWER_NOTIFICATION_TEMPLATE={% raw %}{{if .}}<strong>Watchtower-{% endraw %}{{ grains.host }}{% raw %}</strong><br/>{{range .}}{{.Message}}<br/>{{end}}{{end}}{% endraw %}
+      - WATCHTOWER_NOTIFICATION_DELAY=10
