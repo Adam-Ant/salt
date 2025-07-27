@@ -5,6 +5,9 @@
   {%- do optional_groups.append('systemd-journal') %}
 {%- endif %}
 
+include:
+  - secret.users
+
 users:
   adam:
     groups: {{ admin_groups | json }}

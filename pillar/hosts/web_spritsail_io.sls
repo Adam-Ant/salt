@@ -1,3 +1,10 @@
+include:
+  - secret.arg-updater
+  - secret.drone
+  - secret.gitea
+  - secret.registry
+  - secret.watchtower
+
 docker:
   options:
     ipv6: true
